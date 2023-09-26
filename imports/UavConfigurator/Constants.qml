@@ -70,6 +70,10 @@ QtObject {
     readonly property int _BAT_NORM: 0
     readonly property int _BAT_ALERT: -1
 
+    readonly property int _SENSOR_WELL: 1
+    readonly property int _SENSOR_ABS: 0
+    readonly property int _SENSOR_BAD: -1
+
     property DirectoryFontLoader directoryFontLoader: DirectoryFontLoader {
         id: directoryFontLoader
     }

@@ -82,26 +82,25 @@ Row {
         ToolButton {
             id: buttonBattery
             text: qsTr("Battery")
-            //            icon.color: "#dde21111"
-            //            anchors.top: parent.top
-            //            anchors.left: parent.left
-            //            anchors.bottom: parent.bottom
             checkable: false
             highlighted: false
             display: AbstractButton.TextUnderIcon
-            icon.source: "../images/icons/cf_icon_bat_grey.svg"
+            icon.source: "../images/icons/cf_icon_bat_full.svg"
             //            flat: true
             width: iconWidth
             height: iconHeight
 
-//            onClicked: setBatteryState(1)
+            onClicked: setBatteryState(1)
 
             function setBatteryState(batteryHealth) {
                 if (batteryHealth === Constants._BAT_WELL) {
+                    icon.source= "../images/icons/cf_icon_bat_full.svg"
                     icon.color = Constants.green
                 } else if (batteryHealth === Constants._BAT_NORM) {
-                    icon.color = Constants.lightYellow
+                    icon.source= "../images/icons/cf_icon_bat_half.svg"
+                    icon.color = Constants.orange
                 } else {
+                    icon.source= "../images/icons/cf_icon_bat_low.svg"
                     icon.color = Constants.lightRed
                 }
             }
@@ -110,13 +109,22 @@ Row {
         ToolButton {
             id: buttonGyro
             text: qsTr("Gyro")
-            //            anchors.top: parent.top
-            //            anchors.left: buttonBatteryStatus.right
-            //            anchors.bottom: parent.bottom
             icon.source: "../images/icons/sensor_gyro_on.png"
             display: AbstractButton.TextUnderIcon
             width: iconWidth
             height: iconHeight
+
+//            onClicked: setGyroState(1)
+
+            function setGyroState(state) {
+                if (state === Constants._SENSOR_WELL) {
+                    icon.color = Constants.blue
+                } else if (state === Constants._SENSOR_ABS) {
+                    icon.color = Constants.gray
+                } else {
+                    icon.color = Constants.lightRed
+                }
+            }
         }
 
         ToolButton {
@@ -129,6 +137,18 @@ Row {
             display: AbstractButton.TextUnderIcon
             width: iconWidth
             height: iconHeight
+
+            onClicked: setGpsState(1)
+
+            function setGpsState(state) {
+                if (state === Constants._SENSOR_WELL) {
+                    icon.color = Constants.blue
+                } else if (state === Constants._SENSOR_ABS) {
+                    icon.color = Constants.gray
+                } else {
+                    icon.color = Constants.lightRed
+                }
+            }
         }
 
         ToolButton {
@@ -141,6 +161,18 @@ Row {
             display: AbstractButton.TextUnderIcon
             width: iconWidth
             height: iconHeight
+
+            onClicked: setAccelState(-1)
+
+            function setAccelState(state) {
+                if (state === Constants._SENSOR_WELL) {
+                    icon.color = Constants.blue
+                } else if (state === Constants._SENSOR_ABS) {
+                    icon.color = Constants.gray
+                } else {
+                    icon.color = Constants.lightRed
+                }
+            }
         }
 
         ToolButton {
@@ -153,6 +185,18 @@ Row {
             display: AbstractButton.TextUnderIcon
             width: iconWidth
             height: iconHeight
+
+            onClicked: setMagnetoState(1)
+
+            function setMagnetoState(state) {
+                if (state === Constants._SENSOR_WELL) {
+                    icon.color = Constants.blue
+                } else if (state === Constants._SENSOR_ABS) {
+                    icon.color = Constants.gray
+                } else {
+                    icon.color = Constants.lightRed
+                }
+            }
         }
 
         ToolButton {
@@ -165,6 +209,18 @@ Row {
             display: AbstractButton.TextUnderIcon
             width: iconWidth
             height: iconHeight
+
+            onClicked: setBaroState(-1)
+
+            function setBaroState(state) {
+                if (state === Constants._SENSOR_WELL) {
+                    icon.color = Constants.blue
+                } else if (state === Constants._SENSOR_ABS) {
+                    icon.color = Constants.gray
+                } else {
+                    icon.color = Constants.lightRed
+                }
+            }
         }
 
         ToolButton {
@@ -177,6 +233,18 @@ Row {
             display: AbstractButton.TextUnderIcon
             width: iconWidth
             height: iconHeight
+
+            onClicked: setSpeedState(-1)
+
+            function setSpeedState(state) {
+                if (state === Constants._SENSOR_WELL) {
+                    icon.color = Constants.blue
+                } else if (state === Constants._SENSOR_ABS) {
+                    icon.color = Constants.gray
+                } else {
+                    icon.color = Constants.lightRed
+                }
+            }
         }
     }
 
@@ -188,19 +256,9 @@ Row {
         anchors.bottom: globalToolbar.bottom
         layoutDirection: Qt.RightToLeft
 
-        Image {
-            id: inavLogo
-            x: 570
-            y: 0
-            width: 100
-            height: 100
-            source: "../images/inav_icon_128.png"
-            fillMode: Image.PreserveAspectFit
-        }
-
         Rectangle {
             id: ardupilot
-            color: Constants.blue
+            color: Constants.darkGray
             width: 100
             height: 100
             radius: 10
@@ -214,19 +272,29 @@ Row {
             }
         }
 
-        Rectangle {
-            id: hti
-            color: Constants.lightGray
-            width: 175
+        Image {
+            id: inavLogo
+            x: 570
+            y: 0
+            width: 100
             height: 100
-            radius: 10
-
-            Image {
-                id: sciskyLogo
-                height: 100
-                source: "../images/scisky-logo.svg"
-                fillMode: Image.PreserveAspectFit
-            }
+            source: "../images/inav_icon_128.png"
+            fillMode: Image.PreserveAspectFit
         }
+
+//        Rectangle {
+//            id: hti
+//            color: Constants.lightGray
+//            width: 175
+//            height: 100
+//            radius: 10
+
+//            Image {
+//                id: sciskyLogo
+//                height: 100
+//                source: "../images/scisky-logo.svg"
+//                fillMode: Image.PreserveAspectFit
+//            }
+//        }
     }
 }
