@@ -8,10 +8,14 @@ Rectangle {
     id: mainContentBound
     width: Constants.width * Constants.globalContentViewWidthFactor
     height: Constants.height - Constants.globalToolBarHeight
+    color: Constants.veryLightYellow
 
     TabBar {
         id: menuBar
         spacing: 4
+//        background: Rectangle {
+//            color: "red"
+//        }
 
         TabButton {
             id: buttonMenu
@@ -26,6 +30,10 @@ Rectangle {
             width: Constants.tabButtonWidth
             height: Constants.tabButtonHeight
             text: qsTr("Menu")
+
+            background: Rectangle {
+                color: Constants.lightYellow
+            }
         }
 
         TabButton {
@@ -35,6 +43,11 @@ Rectangle {
             width: Constants.tabButtonWidth
             height: Constants.tabButtonHeight
             text: qsTr("System Status")
+            enabled: true
+
+            background: Rectangle {
+                color: menuBar.currentIndex === 1 ? Constants.lightYellow : Constants.veryLightYellow
+            }
         }
 
         TabButton {
@@ -44,6 +57,11 @@ Rectangle {
             width: Constants.tabButtonWidth
             height: Constants.tabButtonHeight
             text: qsTr("Firmware")
+            enabled: true
+
+            background: Rectangle {
+                color: menuBar.currentIndex === 2 ? Constants.lightYellow : Constants.veryLightYellow
+            }
         }
 
         TabButton {
@@ -53,6 +71,11 @@ Rectangle {
             width: Constants.tabButtonWidth
             height: Constants.tabButtonHeight
             text: qsTr("Hardware")
+            enabled: true
+
+            background: Rectangle {
+                color: menuBar.currentIndex === 3 ? Constants.lightYellow : Constants.veryLightYellow
+            }
         }
 
         TabButton {
@@ -62,6 +85,11 @@ Rectangle {
             width: Constants.tabButtonWidth
             height: Constants.tabButtonHeight
             text: qsTr("Flight Mode")
+            enabled: true
+
+            background: Rectangle {
+                color: menuBar.currentIndex === 4 ? Constants.lightYellow : Constants.veryLightYellow
+            }
         }
 
         TabButton {
@@ -71,6 +99,11 @@ Rectangle {
             width: Constants.tabButtonWidth
             height: Constants.tabButtonHeight
             text: qsTr("Flight Plan")
+            enabled: true
+
+            background: Rectangle {
+                color: menuBar.currentIndex === 5 ? Constants.lightYellow : Constants.veryLightYellow
+            }
         }
 
         TabButton {
@@ -81,6 +114,14 @@ Rectangle {
             width: Constants.tabButtonWidth
             height: Constants.tabButtonHeight
             text: qsTr("Analysis")
+            enabled: true
+
+            background: Rectangle {
+                color: {
+                    console.log(this)
+                    menuBar.currentIndex === 6 ? Constants.lightYellow : Constants.veryLightYellow
+                }
+            }
         }
 
         TabButton {
@@ -91,6 +132,11 @@ Rectangle {
             width: Constants.tabButtonWidth
             height: Constants.tabButtonHeight
             text: qsTr("Data Access")
+            enabled: true
+
+            background: Rectangle {
+                color: menuBar.currentIndex === 7 ? Constants.lightYellow : Constants.veryLightYellow
+            }
         }
 
         TabButton {
@@ -100,6 +146,11 @@ Rectangle {
             width: Constants.tabButtonWidth
             height: Constants.tabButtonHeight
             text: qsTr("CLI")
+            enabled: true
+
+            background: Rectangle {
+                color: menuBar.currentIndex === 8 ? Constants.lightYellow : Constants.veryLightYellow
+            }
         }
     }
 

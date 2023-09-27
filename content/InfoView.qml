@@ -8,7 +8,7 @@ Rectangle {
     height: Constants.height - Constants.globalToolBarHeight
 //    border.width: 1
 //    border.color: Constants.darkGreen
-    color: Constants.veryLightGreen
+    color: Constants.veryLightYellow
 
     Column {
         id: infoFlow
