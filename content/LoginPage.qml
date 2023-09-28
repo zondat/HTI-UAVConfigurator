@@ -12,8 +12,7 @@ import UavConfigurator 1.0
 
 Page {
     id: loginPage
-
-    signal registerClicked()
+//    signal registerClicked()
     width: 375
     height: 650
     background: Rectangle {
@@ -37,7 +36,8 @@ Page {
             id: loginUsername
             placeholderText: qsTr("User name")
             width: parent.width - 20
-            color: mainTextCOlor
+            selectionColor: "#2a1ee9"
+//            color: mainTextCOlor
             font.pointSize: 14
             font.family: "fontawesome"
             leftPadding: 30
@@ -65,7 +65,7 @@ Page {
             placeholderText: qsTr("Password")
             width: parent.width - 20
 //            Layout.alignment: Qt.AlignHCenter
-            color: mainTextCOlor
+//            color: mainTextCOlor
             font.pointSize: 14
             font.family: "fontawesome"
             leftPadding: 30
@@ -89,10 +89,6 @@ Page {
             }
         }
 
-        Item {
-            height: 20
-        }
-
         Button{
             height: 50
             width: loginPage.width - 20
@@ -111,15 +107,11 @@ Page {
             onClicked: stackView.push("qrc:/RegisterScreen.qml", {"uname": "arun", "pword": "some"}) //registerClicked()
         }
 
-        Text {
-            id: name
-            text: '<html><style type="text/css"></style><a href="http://google.com">Forgot password?</a></html>' //qsTr("Forgot password?")
-            linkColor: mainTextCOlor
-//            anchors.alignment: Qt.AlignHCenter
-            font.pointSize: 14
-            color: mainTextCOlor
-//            margin: 10
-            onLinkActivated: forgotPassword()
+        // To complete
+        function loginUser(userName, password) {
+
         }
+
+
     }
 }

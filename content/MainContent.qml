@@ -13,9 +13,6 @@ Rectangle {
     TabBar {
         id: menuBar
         spacing: 4
-//        background: Rectangle {
-//            color: "red"
-//        }
 
         TabButton {
             id: buttonMenu
@@ -118,7 +115,7 @@ Rectangle {
 
             background: Rectangle {
                 color: {
-                    console.log(this)
+//                    console.log(this)
                     menuBar.currentIndex === 6 ? Constants.lightYellow : Constants.veryLightYellow
                 }
             }
@@ -166,13 +163,12 @@ Rectangle {
         currentIndex: menuBar.currentIndex
 
         Rectangle {
-            color: 'teal'
+            color: Constants.veryLightBlue
             anchors.fill: parent
         }
 
-        Rectangle {
-            color: 'plum'
-            anchors.fill: parent
+        SystemStatusPage {
+            id: systemStatus
         }
 
         Rectangle {

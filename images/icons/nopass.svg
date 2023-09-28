@@ -1,11 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 19.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="-365 365.6 544 544" style="enable-background:new -365 365.6 544 544;" xml:space="preserve">
-<style type="text/css">
-	.st0{fill:#E20000;}
-</style>
-<path class="st0" d="M98.8,446.1c-105.6-105.6-276.9-105.6-382.5,0c-105.6,105.6-105.6,276.9,0,382.5c105.6,105.6,277,105.6,382.5,0
-	C204.4,723,204.4,551.8,98.8,446.1z M3.7,786.2l-96-95.2l-95.3,96.2l-53.7-53.6l95.2-96l-96.2-95.3l53.6-53.7l96,95.2l95.3-96.2
-	l53.7,53.6l-95.2,96l96.2,95.3L3.7,786.2z"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="32px" height="32px" viewBox="0 0 32 32" version="1.1">
+<g id="surface1">
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(88.627451%,0%,0%);fill-opacity:1;" d="M 27.28125 4.734375 C 21.070312 -1.476562 10.992188 -1.476562 4.78125 4.734375 C -1.429688 10.945312 -1.429688 21.023438 4.78125 27.234375 C 10.992188 33.445312 21.078125 33.445312 27.28125 27.234375 C 33.492188 21.023438 33.492188 10.953125 27.28125 4.734375 Z M 21.6875 24.742188 L 16.042969 19.140625 L 10.433594 24.800781 L 7.277344 21.648438 L 12.875 16 L 7.21875 10.394531 L 10.371094 7.234375 L 16.019531 12.835938 L 21.625 7.175781 L 24.78125 10.328125 L 19.183594 15.976562 L 24.839844 21.582031 Z M 21.6875 24.742188 "/>
+</g>
 </svg>
