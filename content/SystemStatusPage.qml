@@ -4,33 +4,39 @@ import UavConfigurator 1.0
 import QtQuick.Layouts 2.15
 
 Page {
+    id: systemStatusPage
+
+    signal sigShowInfo(string sensor)
+
     property int sensorNum: 6
     property int headerFontSize: 17
     property int contentFontSize: 15
 
-    id: systemStatusPage
     background: Rectangle {
         anchors.fill: parent
         color: Constants.veryLightGray
     }
+
     Component.onCompleted: {
-        addSensor("barometer", "GY191", Constants._SENSOR_WELL)
-        addSensor("accelerometer", "GY191", Constants._SENSOR_ABS)
-        addSensor("accelerometer", "GY191", Constants._SENSOR_BAD)
+        addSensor("Gyro", "GY191", Constants._SENSOR_WELL)
+        addSensor("GPS", "M8N", Constants._SENSOR_ABS)
+        addSensor("Accel", "MPU 6050", Constants._SENSOR_BAD)
+        addSensor("Magneto", "GY191", Constants._SENSOR_WELL)
+        addSensor("Baro", "GY191", Constants._SENSOR_ABS)
+        addSensor("Speed", "ASPD 4525", Constants._SENSOR_BAD)
     }
 
     GridLayout {
         id: gridLayout
-        anchors.rightMargin: 30
-        anchors.leftMargin: 15
-        anchors.topMargin: 15
         columns: 3
         rows: sensorNum + 1
         anchors {
-//            fill: parent
             top: parent.top
             left: parent.left
             right: parent.right
+            rightMargin: 30
+            leftMargin: 15
+            topMargin: 15
         }
 
         Text {
@@ -83,39 +89,59 @@ Page {
         }
     }
 
+//    function onClickSensor(sensor) {
+//        console.log("send signal emitted with notice: " + sensor)
+//    }
+
+    function nameToId(str) {
+        return Constants.removeSpaces(Constants.lowerFirstCase(str))
+    }
+
     function addSensor(sensorType, sensorName, status) {
         var importHeader = '  import QtQuick 2.15; import QtQuick.Layouts 2.15; '
-        var fontSetting = '   font {
-                                pixelSize: contentFontSize;
-                                italic: true;
-                            }'
+        var fontSetting = '   font.pixelSize: contentFontSize;
+                              font.italic: true; '
         var alignment = 'Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter;'
+        var sensorId = nameToId(sensorName)
+        var clickEvent = '  MouseArea {
+                                anchors.fill: parent;
+                                onClicked: sigShowInfo("' + sensorId +'");
+                            }'
+
         var sensorTypeElement = Qt.createQmlObject(importHeader +
                                                 'Text { text: "' + sensorType + '";'
-                                                + fontSetting + alignment + '}', gridLayout);
+                                                + fontSetting
+                                                + alignment
+                                                + '}', gridLayout);
+
         var sensorNameElement = Qt.createQmlObject(importHeader +
-                                                   'Text { text: "' + sensorName + '";'
-                                                + fontSetting + alignment + '}', gridLayout);
+                                                'Text { '
+                                                + 'id: ' + sensorId +';'
+                                                + 'text: "' + sensorName + '";'
+                                                + 'font.underline: true;'
+                                                + fontSetting
+                                                + clickEvent
+                                                + alignment
+                                                + '}', gridLayout);
 
         var statusIcon
         if (status === Constants._SENSOR_WELL) {
             statusIcon = Qt.createQmlObject(importHeader +
                                         'Image {
                                             source: "' + '../images/icons/pass.svg";' +
-                                            'fillMode: Image.PreserveAspectFit; ' + alignment+
+                                            'fillMode: Image.PreserveAspectFit; ' + alignment +
                                         '}', gridLayout);
         } else if (status === Constants._SENSOR_ABS) {
             statusIcon = Qt.createQmlObject(importHeader +
                                         'Image {
                                             source: "' + '../images/icons/cross2.svg";' +
-                                            'fillMode: Image.PreserveAspectFit; ' + alignment+
+                                            'fillMode: Image.PreserveAspectFit; ' + alignment +
                                         '}', gridLayout);
         } else {
             statusIcon = Qt.createQmlObject(importHeader +
                                         'Image {
                                             source: "' + '../images/icons/nopass.svg";' +
-                                            'fillMode: Image.PreserveAspectFit;' + alignment+
-
+                                            'fillMode: Image.PreserveAspectFit;' + alignment +
                                         '}', gridLayout);
         }
 

@@ -168,12 +168,11 @@ Rectangle {
         }
 
         SystemStatusPage {
-            id: systemStatus
+            id: systemStatusPage
         }
 
-        Rectangle {
-            color: 'teal'
-            anchors.fill: parent
+        FirmwarePage {
+            id: firmwarePage
         }
         Rectangle {
             color: 'plum'

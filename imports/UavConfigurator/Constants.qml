@@ -77,4 +77,15 @@ QtObject {
     property DirectoryFontLoader directoryFontLoader: DirectoryFontLoader {
         id: directoryFontLoader
     }
+
+    /*************/
+    /*** Utils ***/
+    /*************/
+    function removeSpaces(str) {
+        return str.split(" ").join("")
+    }
+
+    function lowerFirstCase(str) {
+        return str.charAt(0).toLowerCase() + str.slice(1);
+    }
 }

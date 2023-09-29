@@ -12,9 +12,9 @@ Rectangle {
 
     Column {
         id: infoFlow
-        anchors{
-            fill: parent
-        }
+//        anchors{
+//            fill: parent
+//        }
         spacing: 2
 
         Flickable {
