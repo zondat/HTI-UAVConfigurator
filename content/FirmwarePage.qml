@@ -18,6 +18,7 @@ Page {
     }
 
     property var firmwares : Object.keys(versionMap);
+    property int comboboxHeight: 42;
 
     Component.onCompleted:  {
         // Firmware combobox
@@ -34,11 +35,9 @@ Page {
         border.color: Constants.orange
         border.width: 1
         anchors.horizontalCenterOffset: 5
-        width: 500
-        height: 300
-        anchors {
-            horizontalCenter: parent.horizontalCenter
-        }
+        width: 525
+        height: 225
+        anchors.horizontalCenter: parent.horizontalCenter
 
         GridLayout {
             id: gridLayout
@@ -105,9 +104,9 @@ Page {
                 id: cbbFirmware
                 font.pointSize: 10
                 model: ListModel {}
-                anchors.right: parent.horizontalCenter
+                anchors.right: parent.right
                 Layout.alignment: Qt.AlignLeft | Qt.AlignBaseline
-                anchors.rightMargin: -228
+                Layout.preferredHeight: comboboxHeight
                 Layout.column: 3
                 Layout.row: 1
                 Layout.columnSpan: 3
@@ -130,8 +129,8 @@ Page {
                 id: cbbVersion
                 font.pointSize: 10
                 model: ListModel {}
-                anchors.right: parent.horizontalCenter
-                anchors.rightMargin: -228
+                anchors.right: parent.right
+                Layout.preferredHeight: comboboxHeight
                 Layout.alignment: Qt.AlignLeft | Qt.AlignBaseline
                 Layout.column: 3
                 Layout.row: 2
@@ -147,7 +146,7 @@ Page {
                 Layout.row: 3
                 Layout.columnSpan: 3
                 Layout.rowSpan: 1
-                height: 30
+                Layout.preferredHeight: 35
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignRight | Qt.AlignBaseline
 
@@ -177,16 +176,19 @@ Page {
 
             Button {
                 text: "Flash"
+                Layout.fillWidth: false
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
                 Layout.column: 1
                 Layout.row: 4
                 Layout.columnSpan: 1
                 Layout.rowSpan: 1
+                enabled: cbbFirmware.currentIndex!==-1 && cbbVersion.currentIndex!==-1 || localFirmwarePath.length > 0
 //                onClicked:
             }
 
             Button {
                 text: "Load online"
+                Layout.fillWidth: false
                 Layout.rightMargin: -49
                 Layout.leftMargin: 25
                 Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
@@ -204,6 +206,7 @@ Page {
 
             Button {
                 text: "Load offline"
+                Layout.fillWidth: false
                 Layout.rightMargin: 0
                 Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
                 Layout.column: 4

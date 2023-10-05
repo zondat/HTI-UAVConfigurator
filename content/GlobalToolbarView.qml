@@ -22,8 +22,8 @@ Row {
 
     Row {
         id: mainToolbar
-        //        anchors.top: parent.top
         anchors.left: parent.left
+        //        anchors.top: parent.top
         //        anchors.bottom: parent.bottom
         width: Constants.mainToolbarWidth
         height: barHeight

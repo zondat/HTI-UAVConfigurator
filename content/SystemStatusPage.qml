@@ -129,18 +129,21 @@ Page {
             statusIcon = Qt.createQmlObject(importHeader +
                                         'Image {
                                             source: "' + '../images/icons/pass.svg";' +
+                                            'scale: 0.85;' +
                                             'fillMode: Image.PreserveAspectFit; ' + alignment +
                                         '}', gridLayout);
         } else if (status === Constants._SENSOR_ABS) {
             statusIcon = Qt.createQmlObject(importHeader +
                                         'Image {
                                             source: "' + '../images/icons/cross2.svg";' +
+                                            'scale: 0.8;' +
                                             'fillMode: Image.PreserveAspectFit; ' + alignment +
                                         '}', gridLayout);
         } else {
             statusIcon = Qt.createQmlObject(importHeader +
                                         'Image {
                                             source: "' + '../images/icons/nopass.svg";' +
+                                            'scale: 0.85;' +
                                             'fillMode: Image.PreserveAspectFit;' + alignment +
                                         '}', gridLayout);
         }

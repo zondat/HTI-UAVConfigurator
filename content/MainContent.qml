@@ -4,11 +4,14 @@ import UavConfigurator 1.0
 import QtQuick.Layouts 2.15
 
 
-Rectangle {
+Page {
     id: mainContentBound
     width: Constants.width * Constants.globalContentViewWidthFactor
     height: Constants.height - Constants.globalToolBarHeight
-    color: Constants.veryLightYellow
+    background: Rectangle {
+        color: Constants.veryLightYellow
+        anchors.fill: parent
+    }
 
     TabBar {
         id: menuBar
@@ -174,14 +177,11 @@ Rectangle {
         FirmwarePage {
             id: firmwarePage
         }
-        Rectangle {
-            color: 'plum'
-            anchors.fill: parent
+
+        HardwarePage {
+            id: hardwarePage
         }
-        Rectangle {
-            color: 'teal'
-            anchors.fill: parent
-        }
+
         Rectangle {
             color: 'plum'
             anchors.fill: parent
@@ -204,5 +204,19 @@ Rectangle {
         }
     }
 
+//    footer: Row {
+//        height: 45
+//        layoutDirection: Qt.RightToLeft
+//        spacing: 10
+//        Button {
+//            id: btnSave
+//            text: "Save and Reboot"
+//        }
+
+//        Button {
+//            id: btnDiscard
+//            text: "Discard change"
+//        }
+//    }
 }
 
