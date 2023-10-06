@@ -5,16 +5,11 @@ import QtQuick.Layouts 2.15
 
 Page {
     id: hardwarePage
-
-    signal sigShowInfo(string sensor)
-
     property int sensorNum: 7
-    property int headerFontSize: 17
-    property int contentFontSize: 15
-    property int comboboxHeight: 42
-    property int comboboxWidth: 130
     property int rowHeight: 45
     property real scaleFactor: 0.4
+
+    signal sigShowInfo(string sensor)
 
     Component.onCompleted: {
         addAccelerometer("No Selection");
@@ -65,7 +60,6 @@ Page {
             right: parent.right
             topMargin: 10
         }
-//            height: rowHeight
         flow: GridLayout.LeftToRight
         layoutDirection: Qt.LeftToRight
         columns: 3
@@ -97,7 +91,6 @@ Page {
             Layout.row: 0
             text: "Name"
             horizontalAlignment: Text.AlignHCenter
-//                Layout.fillWidth: true
             Layout.preferredWidth: parent.width / 3
         }
 
@@ -148,8 +141,8 @@ Page {
             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
             font.pointSize: 10
             model: ListModel {}
-            Layout.preferredHeight: comboboxHeight
-            Layout.preferredWidth: comboboxWidth
+            Layout.preferredHeight: Constants.comboboxHeight
+            Layout.preferredWidth: Constants.comboboxWidth
         }
 
         Image {
@@ -211,8 +204,8 @@ Page {
             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
             font.pointSize: 10
             model: ListModel {}
-            Layout.preferredHeight: comboboxHeight
-            Layout.preferredWidth: comboboxWidth
+            Layout.preferredHeight: Constants.comboboxHeight
+            Layout.preferredWidth: Constants.comboboxWidth
         }
 
         Image {
@@ -242,8 +235,8 @@ Page {
             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
             font.pointSize: 10
             model: ListModel {}
-            Layout.preferredHeight: comboboxHeight
-            Layout.preferredWidth: comboboxWidth
+            Layout.preferredHeight: Constants.comboboxHeight
+            Layout.preferredWidth: Constants.comboboxWidth
         }
 
         Image {
@@ -273,8 +266,8 @@ Page {
             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
             font.pointSize: 10
             model: ListModel {}
-            Layout.preferredHeight: comboboxHeight
-            Layout.preferredWidth: comboboxWidth
+            Layout.preferredHeight: Constants.comboboxHeight
+            Layout.preferredWidth: Constants.comboboxWidth
         }
 
         Image {
@@ -304,8 +297,8 @@ Page {
             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
             font.pointSize: 10
             model: ListModel {}
-            Layout.preferredHeight: comboboxHeight
-            Layout.preferredWidth: comboboxWidth
+            Layout.preferredHeight: Constants.comboboxHeight
+            Layout.preferredWidth: Constants.comboboxWidth
         }
 
         Image {

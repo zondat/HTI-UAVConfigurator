@@ -62,6 +62,13 @@ QtObject {
     readonly property double globalToolbarWidthFactor: 1/3
     readonly property double infoFlowDivideFactor: 0.5
 
+    readonly property int comboboxHeight: 42
+    readonly property int comboboxWidth: 130
+    readonly property int headerFontSize: 17
+    readonly property int contentFontSize: 15
+
+    readonly property int channelPanelHeight: 100
+    readonly property int channelPanelWidth: 750
 
     /*******************/
     /*** Enumeration ***/
