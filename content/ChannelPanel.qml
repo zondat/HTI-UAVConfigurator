@@ -5,7 +5,7 @@ import UavConfigurator 1.0
 Item {
     id: channelPanel
     width: 700; //Constants.channelPanelWidth
-    height: 150; //Constants.channelPanelHeight
+    height: 110; //Constants.channelPanelHeight
 
     property string channelFunctionName: "ARM"
     property string channelName: "CH5"
@@ -23,15 +23,9 @@ Item {
     Rectangle {
         id: boundingRect
         width: Constants.comboboxWidth
-        color: Constants.lightGray
-
         anchors {
             left: chnHeader.right
-            top: channelPanel.top
-            bottom: channelPanel.bottom
-            leftMargin: 5
             topMargin: 10
-            bottomMargin: 10
         }
 
         ComboBox {
@@ -43,6 +37,8 @@ Item {
                 top: boundingRect.top
                 left: boundingRect.left
                 right: boundingRect.right
+                leftMargin: 5
+                rightMargin: 5
             }
         }
 
@@ -102,11 +98,11 @@ Item {
 
     RangeSliderPanel {
         id: rangeSlider
+        anchors.verticalCenter: parent.verticalCenter
         preferedWidth: channelPanel.width - chnHeader.width - boundingRect.width
         preferedHeight: channelPanel.height
 
         anchors {
-            top: channelPanel.top
             right: channelPanel.right
             left: boundingRect.right
         }

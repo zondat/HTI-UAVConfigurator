@@ -9,7 +9,7 @@ Rectangle {
     property int majorScale: 5
     property int minorScale: 4
     property int preferedWidth: 700
-    property int preferedHeight: 50
+    property int preferedHeight: 100
     property int maxRange: 2000
     property int minRange: 1000
 
@@ -18,6 +18,7 @@ Rectangle {
 
     width: preferedWidth
     height: preferedHeight
+    color: Constants.lightGray
     visible: true
 
     RangeSlider {
