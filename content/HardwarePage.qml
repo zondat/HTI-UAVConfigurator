@@ -124,7 +124,7 @@ Page {
             font {
                 bold: false
                 italic: true
-                pixelSize: contentFontSize
+                pixelSize: Constants.contentFontSize
             }
             Layout.column: 0
             Layout.row: 2
@@ -157,7 +157,7 @@ Page {
 //            font {
 //                bold: false
 //                italic: true
-//                pixelSize: contentFontSize
+//                pixelSize: Constants.contentFontSize
 //            }
 //            Layout.column: 0
 //            Layout.row: 3
@@ -189,7 +189,7 @@ Page {
             font {
                 bold: false
                 italic: true
-                pixelSize: contentFontSize
+                pixelSize: Constants.contentFontSize
             }
             Layout.column: 0
             Layout.row: 3
@@ -220,7 +220,7 @@ Page {
             font {
                 bold: false
                 italic: true
-                pixelSize: contentFontSize
+                pixelSize: Constants.contentFontSize
             }
             Layout.column: 0
             Layout.row: 4
@@ -251,7 +251,7 @@ Page {
             font {
                 bold: false
                 italic: true
-                pixelSize: contentFontSize
+                pixelSize: Constants.contentFontSize
             }
             Layout.column: 0
             Layout.row: 5
@@ -282,7 +282,7 @@ Page {
             font {
                 bold: false
                 italic: true
-                pixelSize: contentFontSize
+                pixelSize: Constants.contentFontSize
             }
             Layout.column: 0
             Layout.row: 6

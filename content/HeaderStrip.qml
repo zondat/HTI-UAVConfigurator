@@ -4,13 +4,18 @@ import UavConfigurator 1.0
 
 Rectangle {
     id: headerStrip
-    property string label: "Label"
-    property int height: 30
-    property int width: parent.width
+    property string headerName: "Label"
+    property int defaultHeight: 30
     property int preferredFontSize: 15
     property bool isItalic: true
     property bool isBold: true
 //    property bool isSolidBackground: true
+//    width: parent.width
+    height: defaultHeight
+    anchors {
+        left: parent.left
+        right: parent.right
+    }
 
     gradient:
         Gradient {
@@ -22,7 +27,7 @@ Rectangle {
 
     Text {
         id: txtLabel
-        text: qsTr(label)
+        text: qsTr(headerName)
         color: Constants.lightGray
         font {
             pixelSize: preferredFontSize

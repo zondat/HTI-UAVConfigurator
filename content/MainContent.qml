@@ -182,10 +182,10 @@ Page {
             id: hardwarePage
         }
 
-        Rectangle {
-            color: 'plum'
-            anchors.fill: parent
+        FlightModePage {
+            id: flightModePage
         }
+
         Rectangle {
             color: 'teal'
             anchors.fill: parent

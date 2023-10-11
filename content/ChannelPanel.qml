@@ -8,7 +8,7 @@ Item {
     height: 110; //Constants.channelPanelHeight
 
     property string channelFunctionName: "ARM"
-    property string channelName: "CH5"
+//    property string channelName: "CH5"
 
     ChannelHeader {
         id: chnHeader

@@ -5,25 +5,13 @@ import QtQuick.Layouts 2.15
 
 Page {
     id: flightModePage
+    anchors.fill: parent
+
     ScrollView {
-           anchors.fill: parent
+        anchors.fill: parent
+        ModeSettingPanel {
 
-           Column {
-               width: parent.width
+        }
 
-               // Long content to be displayed in the ScrollView
-               Repeater {
-                   model: 20 // Adjust the number of items as needed
-                   Rectangle {
-                       width: parent.width
-                       height: 50
-                       color: index % 2 === 0 ? "lightgray" : "lightblue"
-                       Text {
-                           anchors.centerIn: parent
-                           text: "Item " + (index + 1)
-                       }
-                   }
-               }
-           }
-       }
+    }
 }
