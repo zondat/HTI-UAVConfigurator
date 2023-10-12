@@ -36,6 +36,7 @@ Rectangle {
         }
         anchors {
             left: headerStrip.left
+            leftMargin: 15
             verticalCenter: headerStrip.verticalCenter
         }
     }

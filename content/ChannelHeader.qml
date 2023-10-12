@@ -35,6 +35,8 @@ Item {
 
         SwitchButton {
             id: btnEnable
+            text: "Enable"
+            checked: false
             anchors{
                 top: txtLabel.top
                 left: functionRect.left

@@ -82,5 +82,59 @@ ScrollView {
                 right: parent.right
             }
         }
+
+        // Flight modes setting
+        HeaderStrip {
+            id: hdAssistanceMode
+            headerName:"Assistance Modes"
+            anchors {
+                top: pnManual.bottom
+                topMargin: Constants.globalVerticalSpacing * 2
+            }
+        }
+
+        ChannelPanel {
+            id: pnAltHold
+            channelFunctionName: "ALTITUDE HOLD"
+            anchors {
+                top: hdAssistanceMode.bottom
+                topMargin: Constants.globalVerticalSpacing
+                left: parent.left
+                right: parent.right
+            }
+        }
+
+        ChannelPanel {
+            id: pnHeadingHold
+            channelFunctionName: "HEADING HOLD"
+            anchors {
+                top: pnAltHold.bottom
+                topMargin: Constants.globalVerticalSpacing
+                left: parent.left
+                right: parent.right
+            }
+        }
+
+        ChannelPanel {
+            id: pnAssistTurn
+            channelFunctionName: "TURN ASSIST"
+            anchors {
+                top: pnHeadingHold.bottom
+                topMargin: Constants.globalVerticalSpacing
+                left: parent.left
+                right: parent.right
+            }
+        }
+
+        ChannelPanel {
+            id: pnAutoLevel
+            channelFunctionName: "AUTO LEVEL"
+            anchors {
+                top: pnAssistTurn.bottom
+                topMargin: Constants.globalVerticalSpacing
+                left: parent.left
+                right: parent.right
+            }
+        }
     }
 }
