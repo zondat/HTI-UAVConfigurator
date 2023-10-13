@@ -4,8 +4,8 @@ import UavConfigurator 1.0
 
 Item {
     id: channelPanel
-    width: 700; //Constants.channelPanelWidth
-    height: 110; //Constants.channelPanelHeight
+    width: Constants.channelPanelWidth
+    height: Constants.channelPanelHeight
 
     property string channelFunctionName: "ARM"
 //    property string channelName: "CH5"

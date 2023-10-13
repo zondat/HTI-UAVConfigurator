@@ -5,168 +5,228 @@ import QtQuick.Layouts 2.15
 
 Page {
     id: flightModePage
-    anchors.fill: parent
 
-    Flickable  {
-        id: flickable
-        anchors {
-            fill: parent
-//            top: parent.top
-            topMargin: Constants.globalVerticalSpacing
-//            left: parent.left
-            leftMargin: Constants.globalHorizontalSpacing
-//            right: parent.right
-            rightMargin: Constants.globalHorizontalSpacing
-            bottomMargin: Constants.globalVerticalSpacing
+    Column {
+        anchors.fill: parent
+
+        ScrollView {
+            id: scrvFlightModes
+            anchors {
+                top: parent.top
+                left: parent.left
+                right: parent.right
+            }
+            height: 650
+
+            contentWidth: availableWidth
+
+            Column {
+                width: parent.width
+
+                HeaderStrip {
+                    id: hdArm
+                    headerName:"ARMING"
+                    width: parent.width
+                    anchors {
+                        topMargin: Constants.globalVerticalSpacing * 2
+                        left: parent.left
+                        right: parent.right
+                    }
+                }
+
+                ChannelPanel {
+                    id: pnArm
+                    channelFunctionName: "ARM"
+                    anchors {
+                        topMargin: Constants.globalVerticalSpacing
+                        left: parent.left
+                        right: parent.right
+                        leftMargin: Constants.globalHorizontalSpacing
+                        rightMargin: Constants.globalHorizontalSpacing
+                    }
+                }
+
+                ChannelPanel {
+                    id: pnPrearm
+                    channelFunctionName: "PREARM"
+                    anchors {
+                        topMargin: Constants.globalVerticalSpacing
+                        left: parent.left
+                        right: parent.right
+                        leftMargin: Constants.globalHorizontalSpacing
+                        rightMargin: Constants.globalHorizontalSpacing
+                    }
+                }
+
+                // Flight modes setting
+                HeaderStrip {
+                    id: hdFlightMode
+                    headerName:"Flight Modes"
+                    anchors {
+                        topMargin: Constants.globalVerticalSpacing * 2
+                    }
+                }
+
+                ChannelPanel {
+                    id: pnAngle
+                    channelFunctionName: "ANGLE"
+                    anchors {
+                        topMargin: Constants.globalVerticalSpacing
+                        left: parent.left
+                        right: parent.right
+                        leftMargin: Constants.globalHorizontalSpacing
+                        rightMargin: Constants.globalHorizontalSpacing
+                    }
+                }
+
+                ChannelPanel {
+                    id: pnHorizontal
+                    channelFunctionName: "HORIZONTAL"
+                    anchors {
+                        topMargin: Constants.globalVerticalSpacing
+                        left: parent.left
+                        right: parent.right
+                        leftMargin: Constants.globalHorizontalSpacing
+                        rightMargin: Constants.globalHorizontalSpacing
+                    }
+                }
+
+                ChannelPanel {
+                    id: pnManual
+                    channelFunctionName: "MANUAL"
+                    anchors {
+                        topMargin: Constants.globalVerticalSpacing
+                        left: parent.left
+                        right: parent.right
+                        leftMargin: Constants.globalHorizontalSpacing
+                        rightMargin: Constants.globalHorizontalSpacing
+                    }
+                }
+
+                // Assistance modes setting
+                HeaderStrip {
+                    id: hdAssistanceMode
+                    headerName:"Assistance Modes"
+                    anchors {
+                        topMargin: Constants.globalVerticalSpacing * 2
+                    }
+                }
+
+                ChannelPanel {
+                    id: pnAltHold
+                    channelFunctionName: "ALTITUDE HOLD"
+                    anchors {
+                        topMargin: Constants.globalVerticalSpacing
+                        left: parent.left
+                        right: parent.right
+                        leftMargin: Constants.globalHorizontalSpacing
+                        rightMargin: Constants.globalHorizontalSpacing
+                    }
+                }
+
+                ChannelPanel {
+                    id: pnHeadingHold
+                    channelFunctionName: "HEADING HOLD"
+                    anchors {
+                        topMargin: Constants.globalVerticalSpacing
+                        left: parent.left
+                        right: parent.right
+                        leftMargin: Constants.globalHorizontalSpacing
+                        rightMargin: Constants.globalHorizontalSpacing
+                    }
+                }
+
+                ChannelPanel {
+                    id: pnAssistTurn
+                    channelFunctionName: "TURN ASSIST"
+                    anchors {
+                        topMargin: Constants.globalVerticalSpacing
+                        left: parent.left
+                        right: parent.right
+                        leftMargin: Constants.globalHorizontalSpacing
+                        rightMargin: Constants.globalHorizontalSpacing
+                    }
+                }
+
+                ChannelPanel {
+                    id: pnAutoLevel
+                    channelFunctionName: "AUTO LEVEL"
+                    anchors {
+                        topMargin: Constants.globalVerticalSpacing
+                        left: parent.left
+                        right: parent.right
+                        leftMargin: Constants.globalHorizontalSpacing
+                        rightMargin: Constants.globalHorizontalSpacing
+                    }
+                }
+
+                ChannelPanel {
+                    id: pnAutoLaunch
+                    channelFunctionName: "AUTO LAUNCH"
+                    anchors {
+                        topMargin: Constants.globalVerticalSpacing
+                        left: parent.left
+                        right: parent.right
+                        leftMargin: Constants.globalHorizontalSpacing
+                        rightMargin: Constants.globalHorizontalSpacing
+                    }
+                }
+            }
         }
 
-//        clip: true
+        Rectangle {
+            id: rectFailsafe
+            border.color: gray
+            color: Constants.lightGray
+            radius: 10
+            width: parent.width
+            height: 500
 
-        ScrollBar.vertical: ScrollBar {
-            parent: flickable.parent
-            anchors.top: flickable.top
-            anchors.left: flickable.left
-            anchors.right: flickable.right
-            anchors.bottom: flickable.bottom
-
-            // Arming setting
-            HeaderStrip {
-                id: hdArm
-                headerName:"ARMING"
-                anchors {
-                    top: parent.top
-                }
+            anchors {
+                top: scrvFlightModes.bottom
+                topMargin: Constants.globalVerticalSpacing * 3
+                left: parent.left
+                right:parent.right
             }
 
-            ChannelPanel {
-                id: pnArm
-                channelFunctionName: "ARM"
-                anchors {
-                    top: hdArm.bottom
-                    topMargin: Constants.globalVerticalSpacing
-                    left: parent.left
-                    right: parent.right
-                }
-            }
+            GridLayout {
+                anchors.fill: rectFailsafe
+                columns: 3
+                rows: 4
+                rowSpacing: Constants.globalHorizontalSpacing
+                columnSpacing: Constants.globalVerticalSpacing
 
-            ChannelPanel {
-                id: pnPrearm
-                channelFunctionName: "PREARM"
-                anchors {
-                    top: pnArm.bottom
-                    topMargin: Constants.globalVerticalSpacing
-                    left: parent.left
-                    right: parent.right
-                }
-            }
+                // Row 1: Field name
+                Text {
+                    id: txtFailsafe
+                    text: qsTr("Failsafe")
+                    Layout.leftMargin: Constants.globalVerticalSpacing
+                    Layout.alignment: Qt.AlignLeft | Qt.AlignTop
+                    Layout.columnSpan: 3
 
-            // Flight modes setting
-            HeaderStrip {
-                id: hdFlightMode
-                headerName:"Flight Modes"
-                anchors {
-                    top: pnPrearm.bottom
-                    topMargin: Constants.globalVerticalSpacing * 2
+                    font {
+                        pixelSize: 15
+                        bold: true
+                        italic: true
+                    }
                 }
-            }
 
-            ChannelPanel {
-                id: pnAngle
-                channelFunctionName: "ANGLE"
-                anchors {
-                    top: hdFlightMode.bottom
-                    topMargin: Constants.globalVerticalSpacing
-                    left: parent.left
-                    right: parent.right
+                // Row 2: Field name
+                RadioButton {
+                    text: "Drop"
+                    Layout.column: 2
+                    Layout.row: 2
                 }
-            }
-
-            ChannelPanel {
-                id: pnHorizontal
-                channelFunctionName: "HORIZONTAL"
-                anchors {
-                    top: pnAngle.bottom
-                    topMargin: Constants.globalVerticalSpacing
-                    left: parent.left
-                    right: parent.right
-                }
-            }
-
-            ChannelPanel {
-                id: pnManual
-                channelFunctionName: "MANUAL"
-                anchors {
-                    top: pnHorizontal.bottom
-                    topMargin: Constants.globalVerticalSpacing
-                    left: parent.left
-                    right: parent.right
-                }
-            }
-
-            // Assistance modes setting
-            HeaderStrip {
-                id: hdAssistanceMode
-                headerName:"Assistance Modes"
-                anchors {
-                    top: pnManual.bottom
-                    topMargin: Constants.globalVerticalSpacing * 2
-                }
-            }
-
-            ChannelPanel {
-                id: pnAltHold
-                channelFunctionName: "ALTITUDE HOLD"
-                anchors {
-                    top: hdAssistanceMode.bottom
-                    topMargin: Constants.globalVerticalSpacing
-                    left: parent.left
-                    right: parent.right
-                }
-            }
-
-            ChannelPanel {
-                id: pnHeadingHold
-                channelFunctionName: "HEADING HOLD"
-                anchors {
-                    top: pnAltHold.bottom
-                    topMargin: Constants.globalVerticalSpacing
-                    left: parent.left
-                    right: parent.right
-                }
-            }
-
-            ChannelPanel {
-                id: pnAssistTurn
-                channelFunctionName: "TURN ASSIST"
-                anchors {
-                    top: pnHeadingHold.bottom
-                    topMargin: Constants.globalVerticalSpacing
-                    left: parent.left
-                    right: parent.right
-                }
-            }
-
-            ChannelPanel {
-                id: pnAutoLevel
-                channelFunctionName: "AUTO LEVEL"
-                anchors {
-                    top: pnAssistTurn.bottom
-                    topMargin: Constants.globalVerticalSpacing
-                    left: parent.left
-                    right: parent.right
-                }
-            }
-
-            ChannelPanel {
-                id: pnAutoLaunch
-                channelFunctionName: "AUTO LAUNCH"
-                anchors {
-                    top: pnAutoLevel.bottom
-                    topMargin: Constants.globalVerticalSpacing
-                    left: parent.left
-                    right: parent.right
+                Image {
+                    width: 30
+                    height: 30
+                    source: "../images/icons/cf_icon_failsafe_grey.svg"
+                    Layout.column: 3
+                    Layout.row: 2
                 }
             }
         }
     }
+
+
 }
