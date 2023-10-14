@@ -9,8 +9,8 @@ Rectangle {
     property int preferredFontSize: 15
     property bool isItalic: true
     property bool isBold: true
-//    property bool isSolidBackground: true
-//    width: parent.width
+    property bool hotFont: false
+
     height: defaultHeight
     anchors {
         left: parent.left
@@ -20,9 +20,9 @@ Rectangle {
     gradient:
         Gradient {
         orientation: Gradient.Horizontal
-        GradientStop { position: 0.0; color: Constants.darkBlue }
-        GradientStop { position: 0.4; color: Constants.blue }
-        GradientStop { position: 1.0; color: Constants.veryLightBlue }
+        GradientStop { position: 0.0; color: hotFont? Constants.lightRed : Constants.darkBlue }
+        GradientStop { position: 0.4; color: hotFont? Constants.orange : Constants.blue }
+        GradientStop { position: 1.0; color: hotFont? Constants.veryLightYellow : Constants.veryLightBlue }
     }
 
     Text {

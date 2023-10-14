@@ -174,59 +174,112 @@ Page {
             }
         }
 
+        HeaderStrip {
+            id: hdFailSafe
+            headerName:"Failsafe"
+            hotFont: true
+            anchors {
+                top: scrvFlightModes.bottom
+                left: parent.left
+                right:parent.right
+                topMargin: Constants.globalVerticalSpacing
+            }
+        }
+
         Rectangle {
             id: rectFailsafe
             border.color: gray
-            color: Constants.lightGray
-            radius: 10
             width: parent.width
-            height: 500
+            height: 175
 
             anchors {
-                top: scrvFlightModes.bottom
-                topMargin: Constants.globalVerticalSpacing * 3
-                left: parent.left
-                right:parent.right
+                top: hdFailSafe.bottom
             }
 
             GridLayout {
                 anchors.fill: rectFailsafe
-                columns: 3
-                rows: 4
-                rowSpacing: Constants.globalHorizontalSpacing
-                columnSpacing: Constants.globalVerticalSpacing
+                columns: 2
+                rows: 2
 
-                // Row 1: Field name
-                Text {
-                    id: txtFailsafe
-                    text: qsTr("Failsafe")
-                    Layout.leftMargin: Constants.globalVerticalSpacing
-                    Layout.alignment: Qt.AlignLeft | Qt.AlignTop
-                    Layout.columnSpan: 3
+                Rectangle {
+                    id: rectOptionDrop
+                    Layout.column: 0
+                    Layout.row: 0
 
-                    font {
-                        pixelSize: 15
-                        bold: true
-                        italic: true
+                    Row {
+                        RadioButton {
+                            id: btnDrop
+                            text: "Drop"
+                        }
+
+                        Image {
+                            source: "../images/icons/cf_failsafe_procedure5.svg"
+                            scale: 1
+                            fillMode: Image.PreserveAspectFit;
+                        }
                     }
                 }
 
-                // Row 2: Field name
-                RadioButton {
-                    text: "Drop"
-                    Layout.column: 2
-                    Layout.row: 2
+                Rectangle {
+                    id: rectOptionLand
+                    Layout.column: 0
+                    Layout.row: 1
+
+                    Row {
+
+                        RadioButton {
+                            id: btnLand
+                            text: "Land"
+                        }
+
+                        Image {
+                            source: "../images/icons/cf_failsafe_procedure6.svg"
+                            scale: 1
+                            fillMode: Image.PreserveAspectFit;
+                        }
+                    }
                 }
-                Image {
-                    width: 30
-                    height: 30
-                    source: "../images/icons/cf_icon_failsafe_grey.svg"
-                    Layout.column: 3
-                    Layout.row: 2
+
+                Rectangle {
+                    id: rectOptionHover
+                    Layout.column: 1
+                    Layout.row: 0
+
+                    Row {
+
+                        RadioButton {
+                            id: btnHover
+                            text: "Hover"
+                        }
+
+                        Image {
+                            source: "../images/icons/cf_failsafe_procedure7.svg"
+                            scale: 1
+                            fillMode: Image.PreserveAspectFit;
+                        }
+                    }
+                }
+
+                Rectangle {
+                    id: rectOptionRTH
+                    Layout.column: 1
+                    Layout.row: 1
+
+                    Row {
+
+                        RadioButton {
+                            id: btnRTH
+                            text: "Return to Home"
+                        }
+
+                        Image {
+                            source: "../images/icons/cf_failsafe_procedure8.svg"
+                            scale: 1
+                            fillMode: Image.PreserveAspectFit;
+                        }
+                    }
                 }
             }
         }
     }
-
-
 }
