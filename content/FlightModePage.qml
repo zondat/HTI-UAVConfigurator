@@ -7,6 +7,7 @@ Page {
     id: flightModePage
 
     Column {
+        id: column
         anchors.fill: parent
 
         ScrollView {
@@ -23,7 +24,7 @@ Page {
             Column {
                 width: parent.width
 
-                HeaderStrip {
+                SectionHeader {
                     id: hdArm
                     headerName:"ARMING"
                     width: parent.width
@@ -59,7 +60,7 @@ Page {
                 }
 
                 // Flight modes setting
-                HeaderStrip {
+                SectionHeader {
                     id: hdFlightMode
                     headerName:"Flight Modes"
                     anchors {
@@ -104,7 +105,7 @@ Page {
                 }
 
                 // Assistance modes setting
-                HeaderStrip {
+                SectionHeader {
                     id: hdAssistanceMode
                     headerName:"Assistance Modes"
                     anchors {
@@ -174,7 +175,7 @@ Page {
             }
         }
 
-        HeaderStrip {
+        SectionHeader {
             id: hdFailSafe
             headerName:"Failsafe"
             hotFont: true
@@ -182,27 +183,28 @@ Page {
                 top: scrvFlightModes.bottom
                 left: parent.left
                 right:parent.right
-                topMargin: Constants.globalVerticalSpacing
+//                topMargin: Constants.globalVerticalSpacing
             }
         }
 
         Rectangle {
             id: rectFailsafe
-            border.color: gray
-            width: parent.width
-            height: 175
-
             anchors {
                 top: hdFailSafe.bottom
+                horizontalCenter: parent.horizontalCenter
             }
+            width: parent.width
+            height: 150
 
             GridLayout {
                 anchors.fill: rectFailsafe
+
                 columns: 2
                 rows: 2
 
                 Rectangle {
                     id: rectOptionDrop
+                    Layout.alignment: Qt.AlignLeft | Qt.AlignTop
                     Layout.column: 0
                     Layout.row: 0
 
@@ -242,6 +244,7 @@ Page {
 
                 Rectangle {
                     id: rectOptionHover
+                    Layout.alignment: Qt.AlignLeft | Qt.AlignTop
                     Layout.column: 1
                     Layout.row: 0
 
