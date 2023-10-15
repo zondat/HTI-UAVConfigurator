@@ -16,6 +16,7 @@ Page {
     TabBar {
         id: menuBar
         spacing: 4
+        currentIndex: 1
 
         TabButton {
             id: buttonMenu
