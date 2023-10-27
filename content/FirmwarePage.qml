@@ -1,6 +1,7 @@
+import UavConfigurator 1.0
+import QtQuick.Layouts
 import QtQuick 2.15
 import QtQuick.Controls 2.15
-import UavConfigurator 1.0
 import QtQuick.Layouts 2.15
 import QtQuick.Dialogs
 
@@ -141,6 +142,7 @@ Page {
 
             TextField {
                 id: localFirmwarePath
+                font.pointSize: 10
                 placeholderText: qsTr("Local firmware path")
                 Layout.column: 3
                 Layout.row: 3
@@ -155,10 +157,12 @@ Page {
             FileDialog {
                 id: fileDialog
                 title: "Choose firmware file"
-//                folder: shortcuts.home // Set the initial folder
-                nameFilters: ["hex files (*.bin)"]
+                currentFolder: "D:/Workspaces/Autopilot/firmware/ardupilot/durandal/4.4.0"
+//                currentFile: "D:/Workspaces/Autopilot/firmware/ardupilot/durandal/4.4.0/arduplane.hex"
+                nameFilters: ["*.hex"]
                 onAccepted: {
-                    localFirmwarePath.text = fileDialog.fileUrl.toString();
+                    var absolutePath = currentFile.toString().substring(8);
+                    localFirmwarePath.text = absolutePath
                 }
 //                {
 //                    if (fileDialog.fileUrls.length > 0) {
