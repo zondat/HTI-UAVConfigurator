@@ -10,24 +10,25 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 import UavConfigurator 1.0
 
-Column {
-    id: mainViewLayout
+Page {
+    id: mainViewPage
     width: Constants.width
     height: Constants.height
 
-    GlobalToolbarView {
-        id: globalToolbar
-        anchors.top: parent.top
-        //        anchors.left: parent.left
-        //        anchors.right: parent.right
-        height: Constants.globalToolBarHeight
-    }
+    Column {
+        id: mainViewLayout
+        anchors.fill: mainViewPage
 
-    ContentView {
-        id: globalContent
-        anchors.top: globalToolbar.bottom
-        //        anchors.left: parent.left
-        //        anchors.right: parent.right
-        anchors.bottom: parent.bottom
+        GlobalToolbarView {
+            id: globalToolbar
+            anchors.top: parent.top
+            height: Constants.globalToolBarHeight
+        }
+
+        ContentView {
+            id: globalContent
+            anchors.top: globalToolbar.bottom
+            anchors.bottom: parent.bottom
+        }
     }
 }

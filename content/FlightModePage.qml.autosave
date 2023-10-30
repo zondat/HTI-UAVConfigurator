@@ -294,6 +294,7 @@ Page {
                 top: rectFailsafe.bottom
                 left: parent.left
                 right:parent.right
+                
             }
         }
 

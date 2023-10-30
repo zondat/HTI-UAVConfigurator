@@ -105,8 +105,7 @@ Page {
                 id: cbbFirmware
                 font.pointSize: 10
                 model: ListModel {}
-                anchors.right: parent.right
-                Layout.alignment: Qt.AlignLeft | Qt.AlignBaseline
+                Layout.alignment: Qt.AlignRight | Qt.AlignBaseline
                 Layout.preferredHeight: comboboxHeight
                 Layout.column: 3
                 Layout.row: 1
@@ -130,9 +129,8 @@ Page {
                 id: cbbVersion
                 font.pointSize: 10
                 model: ListModel {}
-                anchors.right: parent.right
                 Layout.preferredHeight: comboboxHeight
-                Layout.alignment: Qt.AlignLeft | Qt.AlignBaseline
+                Layout.alignment: Qt.AlignRight | Qt.AlignBaseline
                 Layout.column: 3
                 Layout.row: 2
                 Layout.columnSpan: 3
@@ -229,9 +227,9 @@ Page {
     }
 
     footer: ProgressBar {
-        anchors.bottom: parent.bottom
         indeterminate: true
-        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.bottom: parent.bottom
+//        anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottomMargin: 50
         rightPadding: 30
         leftPadding: 30

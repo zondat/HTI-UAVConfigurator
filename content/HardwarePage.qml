@@ -69,7 +69,7 @@ Page {
             font {
                 bold: true
                 italic: true
-                pixelSize: headerFontSize
+                pixelSize: Constants.headerFontSize
             }
             Layout.column: 0
             Layout.row: 0
@@ -85,7 +85,7 @@ Page {
             font {
                 bold: true
                 italic: true
-                pixelSize: headerFontSize
+                pixelSize: Constants.headerFontSize
             }
             Layout.column: 1
             Layout.row: 0
@@ -99,7 +99,7 @@ Page {
             font {
                 bold: true
                 italic: true
-                pixelSize: headerFontSize
+                pixelSize: Constants.headerFontSize
             }
             Layout.column: 2
             Layout.row: 0
