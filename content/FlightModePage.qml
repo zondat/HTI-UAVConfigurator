@@ -18,8 +18,7 @@ Page {
                 left: parent.left
                 right: parent.right
             }
-            height: 570
-
+            height: 550
             contentWidth: availableWidth
 
             Column {
@@ -179,7 +178,7 @@ Page {
         SectionHeader {
             id: hdFailSafe
             headerName:"Failsafe"
-            hotFont: true
+            hotFont: false
             anchors {
                 top: scrvFlightModes.bottom
                 left: parent.left
@@ -188,98 +187,128 @@ Page {
             }
         }
 
-        Rectangle {
-            id: rectFailsafe
+        ScrollView {
+            id: scrvFailsafe
             anchors {
                 top: hdFailSafe.bottom
-                horizontalCenter: parent.horizontalCenter
+                left: parent.left
+                right: parent.right
             }
-            width: parent.width
-            height: 150
+            contentWidth: availableWidth
+            height: 225
 
-            GridLayout {
-                anchors.fill: rectFailsafe
-
-                columns: 2
-                rows: 2
+            Column {
+                id: colFailsafe
+                spacing: Constants.globalVerticalSpacing
+                width: parent.width
 
                 Rectangle {
-                    id: rectOptionDrop
-                    Layout.alignment: Qt.AlignLeft | Qt.AlignTop
-                    Layout.column: 0
-                    Layout.row: 0
+                    id: rectBound1
+                    width: parent.width
+                    height: 100
+                    anchors {
+                        top: hdFailSafe.bottom
+                        left: parent.left
+                        right: parent.right
+                    }
 
-                    Row {
-                        RadioButton {
-                            id: btnDrop
-                            text: "Drop"
+                    Rectangle {
+                        id: rectOptionDrop
+                        anchors.left: parent.left
+                        width: parent.width / 2
+                        height: rectBound1.width
+
+                        Row {
+                            RadioButton {
+                                id: btnDrop
+                                text: "Drop"
+                            }
+
+                            Image {
+                                source: "../images/icons/cf_failsafe_procedure5.svg"
+                                scale: 1
+                                fillMode: Image.PreserveAspectFit;
+                            }
                         }
+                    }
 
-                        Image {
-                            source: "../images/icons/cf_failsafe_procedure5.svg"
-                            scale: 1
-                            fillMode: Image.PreserveAspectFit;
+                    Rectangle {
+                        id: rectOptionHover
+                        anchors {
+                            left: rectOptionDrop.right
+                            right: parent.right
+                        }
+                        height: rectBound1.width
+
+                        Row {
+
+                            RadioButton {
+                                id: btnHover
+                                text: "Hover"
+                            }
+
+                            Image {
+                                source: "../images/icons/cf_failsafe_procedure7.svg"
+                                scale: 1
+                                fillMode: Image.PreserveAspectFit;
+                            }
                         }
                     }
                 }
 
+
                 Rectangle {
-                    id: rectOptionLand
-                    Layout.column: 0
-                    Layout.row: 1
+                    id: rectBound2
+                    width: parent.width
+                    height: 100
+                    anchors {
+                        top: rectBound2.top
+                        left: parent.left
+                        right: parent.right
+                    }
 
-                    Row {
-
-                        RadioButton {
-                            id: btnLand
-                            text: "Land"
+                    Rectangle {
+                        id: rectOptionLand
+                        width: parent.width / 2
+                        height: rectBound2.height
+                        anchors {
+                            left: rectBound2.left
                         }
 
-                        Image {
-                            source: "../images/icons/cf_failsafe_procedure6.svg"
-                            scale: 1
-                            fillMode: Image.PreserveAspectFit;
+                        Row {
+                            RadioButton {
+                                id: btnLand
+                                text: "Land"
+                                autoExclusive: false
+                            }
+
+                            Image {
+                                source: "../images/icons/cf_failsafe_procedure6.svg"
+                                scale: 1
+                                fillMode: Image.PreserveAspectFit;
+                            }
                         }
                     }
-                }
 
-                Rectangle {
-                    id: rectOptionHover
-                    Layout.alignment: Qt.AlignLeft | Qt.AlignTop
-                    Layout.column: 1
-                    Layout.row: 0
-
-                    Row {
-
-                        RadioButton {
-                            id: btnHover
-                            text: "Hover"
+                    Rectangle {
+                        id: rectOptionRTH
+                        height: rectBound2.height
+                        anchors {
+                            left: rectOptionLand.right
+                            right: rectBound2.right
                         }
 
-                        Image {
-                            source: "../images/icons/cf_failsafe_procedure7.svg"
-                            scale: 1
-                            fillMode: Image.PreserveAspectFit;
-                        }
-                    }
-                }
+                        Row {
+                            RadioButton {
+                                id: btnRTH
+                                text: "RTL"
+                            }
 
-                Rectangle {
-                    id: rectOptionRTH
-                    Layout.column: 1
-                    Layout.row: 1
-
-                    Row {
-
-                        RadioButton {
-                            id: btnRTH
-                            text: "Return to Home"
-                        }
-
-                        Image {
-                            source: "../images/icons/cf_failsafe_procedure8.svg"
-                            scale: 1
-                            fillMode: Image.PreserveAspectFit;
+                            Image {
+                                source: "../images/icons/cf_failsafe_procedure8.svg"
+                                scale: 1
+                                fillMode: Image.PreserveAspectFit;
+                            }
                         }
                     }
                 }
@@ -287,21 +316,21 @@ Page {
         }
 
         SectionHeader {
-            id: hdControl
-            headerName:"Save changes"
+            headerName:""
             hotFont: false
             anchors {
-                top: rectFailsafe.bottom
+                top: scrvFailsafe.bottom
                 left: parent.left
                 right:parent.right
             }
+            defaultHeight: 3
         }
 
         Row {
             layoutDirection: Qt.RightToLeft
             spacing: Constants.globalHorizontalSpacing
             anchors {
-                top: hdControl.bottom
+                top: scrvFailsafe.bottom
                 left: parent.left
                 right: parent.right
                 bottom: parent.bottom

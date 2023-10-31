@@ -171,8 +171,8 @@ Page {
             anchors.fill: parent
         }
 
-        SystemStatusPage {
-            id: systemStatusPage
+        InfoPage {
+            id: infoPage
         }
 
         FirmwarePage {
