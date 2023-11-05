@@ -8,6 +8,16 @@ Page {
 
     signal sigShowInfo(string sensor)
 
+    // User's info properties
+    property string userName: "Admin"
+    property string pseudoName: "Admin"
+    property string email: "Admin"
+    property string address: "Yen Hoa, Cau Giay"
+    property string permissions: "All"
+    property int age: 30
+
+
+    // System properties
     property int sensorNum: 6
     property int headerFontSize: 17
     property int contentFontSize: 15
@@ -47,6 +57,52 @@ Page {
             right: parent.right
         }
         height: 300
+
+        Rectangle {
+            id: rectFieldAccount
+            width: parent.width - 20
+            anchors {
+                top: hdAccount.bottom
+                horizontalCenter: parent.horizontalCenter
+            }
+
+            Text {
+                font {
+                    pointSize: 12
+                    family: "fontawesome"
+                    italic: true
+                }
+                leftPadding: 35
+
+                text: pseudoName
+            }
+
+            Image {
+                id: iconUser
+                source: "../images/icons/icon_user.svg"
+                fillMode: Image.PreserveAspectFit
+                anchors {
+                    left: parent.left
+                    verticalCenter: parent.verticalCenter
+                }
+            }
+        }
+
+        TextField {
+            id: txtFieldUsername
+            width: parent.width - 20
+            font {
+                pointSize: 12
+                family: "fontawesome"
+                italic: true
+            }
+            leftPadding: 35
+            anchors {
+                top: txtFieldAccount.bottom
+                horizontalCenter: parent.horizontalCenter
+            }
+            text: userName
+        }
     }
 
     SectionHeader {
