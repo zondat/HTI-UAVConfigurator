@@ -10,9 +10,9 @@ ScrollView {
         width: flightModeView.width
 
         // Arming setting
-        HeaderStrip {
+        ChannelHeader {
             id: hdArm
-            headerName:"ARMING"
+            functionName: "ARMING"
             anchors {
                 top: parent.top
             }
@@ -41,9 +41,9 @@ ScrollView {
         }
 
         // Flight modes setting
-        HeaderStrip {
+        ChannelHeader {
             id: hdFlightMode
-            headerName:"Flight Modes"
+            functionName: "Flight Modes"
             anchors {
                 top: pnPrearm.bottom
                 topMargin: Constants.globalVerticalSpacing * 2
@@ -84,9 +84,9 @@ ScrollView {
         }
 
         // Flight modes setting
-        HeaderStrip {
+        ChannelHeader {
             id: hdAssistanceMode
-            headerName:"Assistance Modes"
+            functionName: "Assistance Modes"
             anchors {
                 top: pnManual.bottom
                 topMargin: Constants.globalVerticalSpacing * 2

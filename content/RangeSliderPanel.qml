@@ -72,7 +72,7 @@ Rectangle {
                     TextInput {
                         x: index * Math.round((rowLayout.width - 30) / (majorScale * minorScale)) - 6
                         font.pixelSize: 14
-                        anchors.top: scaleRect.bottom
+//                        anchors.top: scaleRect.bottom
                         anchors.topMargin: 3
                         text: "" + Math.round((minRange + index * (maxRange - minRange)/(majorScale * minorScale)))
                         readOnly: true // Make the textbox read-only

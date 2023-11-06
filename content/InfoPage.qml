@@ -8,34 +8,28 @@ Page {
 
     signal sigShowInfo(string sensor)
 
-    // User's info properties
-    property string userName: "Admin"
-    property string pseudoName: "Admin"
-    property string email: "Admin"
-    property string address: "Yen Hoa, Cau Giay"
-    property string permissions: "All"
-    property int age: 30
+    readonly property int _SENSOR_TYPE_GPS: 0
+    readonly property int _SENSOR_TYPE_GYRO: 1
+    readonly property int _SENSOR_TYPE_ACCEL: 2
+    readonly property int _SENSOR_TYPE_MAGN: 3
+    readonly property int _SENSOR_TYPE_BARO: 4
+    readonly property int _SENSOR_TYPE_SPD: 5
 
+    property int headerFontSize: 15
+    property int contentFontSize: 10
 
-    // System properties
-    property int sensorNum: 6
-    property int headerFontSize: 17
-    property int contentFontSize: 15
-
-//    background: Rectangle {
-//        anchors.fill: parent
-//        color: Constants.veryLightGray
-//    }
-
-
-//    Component.onCompleted: {
-//        addSensor("Gyro", "GY191", Constants._SENSOR_WELL)
-//        addSensor("GPS", "M8N", Constants._SENSOR_ABS)
-//        addSensor("Accel", "MPU 6050", Constants._SENSOR_BAD)
-//        addSensor("Magneto", "GY191", Constants._SENSOR_WELL)
-//        addSensor("Baro", "GY191", Constants._SENSOR_ABS)
-//        addSensor("Speed", "ASPD 4525", Constants._SENSOR_BAD)
-//    }
+    Component.onCompleted: {
+        addSensor(_SENSOR_TYPE_GPS, "M8N", Constants._SENSOR_WELL)
+        addSensor(_SENSOR_TYPE_GYRO, "M8N", Constants._SENSOR_ABS)
+        addSensor(_SENSOR_TYPE_ACCEL, "MPU 6050", Constants._SENSOR_BAD)
+        addSensor(_SENSOR_TYPE_MAGN, "GY191", Constants._SENSOR_WELL)
+        addSensor(_SENSOR_TYPE_BARO, "BMP280", Constants._SENSOR_ABS)
+        addSensor(_SENSOR_TYPE_SPD, "ASPD 4525", Constants._SENSOR_BAD)
+        enableFlightConfig()
+        enableModeSetting()
+        enableDataAccess()
+        setOtherInfo("zondat cuc ky dep trai")
+    }
 
     SectionHeader {
         id: hdAccount
@@ -53,55 +47,344 @@ Page {
         id: rectUserInfo
         anchors {
             top: hdAccount.bottom
-            left: parent.left
-            right: parent.right
+            horizontalCenter: parent.horizontalCenter
         }
-        height: 300
+        width: parent.width - 100
+        height: 450
 
-        Rectangle {
-            id: rectFieldAccount
-            width: parent.width - 20
+        GridLayout {
+            id: grdUserInfo
+            columns: 5
+            rows: 9
             anchors {
-                top: hdAccount.bottom
-                horizontalCenter: parent.horizontalCenter
+                top: parent.top
+                left: parent.left
+                right: parent.right
+                rightMargin: 30
+                leftMargin: 15
+                topMargin: 15
+            }
+
+            Text {
+                id: labUser
+                font {
+                    bold: true
+                    italic: true
+                    pixelSize: headerFontSize
+                }
+                text: qsTr("User")
+                Layout.alignment: Qt.AlignLeft | Qt.AlignBaseline
+                Layout.column: 0
+                Layout.row: 0
+                Layout.columnSpan: 1
+                Layout.rowSpan: 1
+            }
+
+            TextField {
+                id: txtUserName
+                font.pointSize: contentFontSize
+                text: "Admin"
+                readOnly: true
+                enabled: true
+                Layout.column: 3
+                Layout.row: 0
+                Layout.columnSpan: 2
+                Layout.rowSpan: 1
+                Layout.preferredHeight: 35
+                Layout.fillWidth: true
+                Layout.alignment: Qt.AlignRight | Qt.AlignBaseline
+            }
+
+            Text {
+                id: labName
+                font {
+                    bold: true
+                    italic: true
+                    pixelSize: headerFontSize
+                }
+                text: qsTr("Name")
+                Layout.alignment: Qt.AlignLeft | Qt.AlignBaseline
+                Layout.column: 0
+                Layout.row: 1
+                Layout.columnSpan: 1
+                Layout.rowSpan: 1
+            }
+
+            TextField {
+                id: txtName
+                font.pointSize: contentFontSize
+                text: "Admin"
+                enabled: true
+                readOnly: true
+                Layout.column: 3
+                Layout.row: 1
+                Layout.columnSpan: 2
+                Layout.rowSpan: 1
+                Layout.preferredHeight: 35
+                Layout.fillWidth: true
+                Layout.alignment: Qt.AlignRight | Qt.AlignBaseline
             }
 
             Text {
                 font {
-                    pointSize: 12
-                    family: "fontawesome"
+                    bold: true
                     italic: true
+                    pixelSize: headerFontSize
                 }
-                leftPadding: 35
-
-                text: pseudoName
+                text: qsTr("Client Id")
+                Layout.alignment: Qt.AlignLeft | Qt.AlignBaseline
+                Layout.column: 0
+                Layout.row: 2
+                Layout.columnSpan: 1
+                Layout.rowSpan: 1
             }
 
-            Image {
-                id: iconUser
-                source: "../images/icons/icon_user.svg"
-                fillMode: Image.PreserveAspectFit
-                anchors {
-                    left: parent.left
-                    verticalCenter: parent.verticalCenter
+            TextField {
+                id: txtClientId
+                font.pointSize: contentFontSize
+                text: "32"
+                readOnly: true
+                enabled: true
+                Layout.column: 3
+                Layout.row: 2
+                Layout.columnSpan: 2
+                Layout.rowSpan: 1
+                Layout.preferredHeight: 35
+                Layout.fillWidth: false
+                Layout.alignment: Qt.AlignLeft | Qt.AlignBaseline
+            }
+
+            Text {
+                font {
+                    bold: true
+                    italic: true
+                    pixelSize: headerFontSize
+                }
+                text: qsTr("Permissions")
+                Layout.alignment: Qt.AlignLeft | Qt.AlignBaseline
+                Layout.column: 0
+                Layout.row: 3
+                Layout.columnSpan: 1
+                Layout.rowSpan: 1
+            }
+
+            Button {
+                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                Layout.column: 3
+                Layout.row: 3
+                Layout.columnSpan: 1
+                Layout.rowSpan: 1
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+
+                background: Rectangle {
+                    id: rectFlightConfig
+                    color: Constants.lightGray
+                    radius: 7
+                    anchors.fill: parent
+
+
+                    Text {
+                        id: txtFlightConfig
+                        text: qsTr("Flight Config")
+                        font.pixelSize: headerFontSize
+                        color: Constants.gray
+                        anchors.centerIn: parent
+                    }
+                }
+//                enabled: btnEdit.enabled === false
+            }
+
+            Button {
+                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                Layout.column: 4
+                Layout.row: 3
+                Layout.columnSpan: 1
+                Layout.rowSpan: 1
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+
+                background: Rectangle {
+                    id: rectMapSetting
+                    color: Constants.lightGray
+                    anchors.fill: parent
+                    radius: 7
+
+                    Text {
+                        id: txtMapSetting
+                        text: qsTr("Map Setting")
+                        font.pixelSize: headerFontSize
+                        color: Constants.gray
+                        anchors.centerIn: parent
+                    }
                 }
             }
-        }
 
-        TextField {
-            id: txtFieldUsername
-            width: parent.width - 20
-            font {
-                pointSize: 12
-                family: "fontawesome"
-                italic: true
+            Button {
+                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                Layout.column: 3
+                Layout.row: 4
+                Layout.columnSpan: 1
+                Layout.rowSpan: 1
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+
+                background: Rectangle {
+                    id: rectPlanning
+                    anchors.fill: parent
+                    color: Constants.lightGray
+                    radius: 7
+
+                    Text {
+                        id: txtPlanning
+                        text: qsTr("Planning")
+                        font.pixelSize: headerFontSize
+                        color: Constants.gray
+                        anchors.centerIn: parent
+                    }
+                }
             }
-            leftPadding: 35
-            anchors {
-                top: txtFieldAccount.bottom
-                horizontalCenter: parent.horizontalCenter
+
+            Button {
+                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                Layout.column: 4
+                Layout.row: 4
+                Layout.columnSpan: 1
+                Layout.rowSpan: 1
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+
+                Rectangle {
+                    id: rectDataAccess
+                    color: Constants.lightGray
+                    anchors.fill: parent
+                    radius: 7
+
+                    Text {
+                        id: txtDataAccess
+                        text: qsTr("Data Access")
+                        font.pixelSize: headerFontSize
+                        color: Constants.gray
+                        anchors.centerIn: parent
+                    }
+                }
             }
-            text: userName
+
+
+            Button {
+                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                Layout.column: 3
+                Layout.row: 5
+                Layout.columnSpan: 1
+                Layout.rowSpan: 1
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+
+                Rectangle {
+                    id: rectModeSetting
+                    color: Constants.lightGray
+                    anchors.fill: parent
+                    radius: 7
+
+                    Text {
+                        id: txtModeSetting
+                        text: qsTr("Mode Setting")
+                        font.pixelSize: headerFontSize
+                        color: Constants.gray
+                        anchors.centerIn: parent
+                    }
+                }
+            }
+
+            Button {
+                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                Layout.column: 4
+                Layout.row: 5
+                Layout.columnSpan: 1
+                Layout.rowSpan: 1
+                Layout.fillWidth: true
+
+                Rectangle {
+                    id: rectAnalyzing
+                    color: Constants.lightGray
+                    anchors.fill: parent
+                    radius: 7
+
+                    Text {
+                        id: txtAnalyzing
+                        text: qsTr("Analyzing")
+                        font.pixelSize: headerFontSize
+                        color: Constants.gray
+                        anchors.centerIn: parent
+                    }
+                }
+            }
+
+            Text {
+                id: labOtherInfo
+                font {
+                    bold: true
+                    italic: true
+                    pixelSize: headerFontSize
+                }
+                text: qsTr("Other Info")
+                Layout.alignment: Qt.AlignLeft | Qt.AlignBaseline
+                Layout.column: 0
+                Layout.row: 6
+                Layout.columnSpan: 1
+                Layout.rowSpan: 1
+            }
+
+
+            ScrollView {
+                Layout.column: 3
+                Layout.row: 6
+                Layout.columnSpan: 2
+                Layout.rowSpan: 1
+                Layout.preferredHeight: 70
+                Layout.fillWidth: true
+                Layout.alignment: Qt.AlignRight | Qt.AlignBaseline
+
+                TextArea {
+                    id: txtOtherInfo
+                    text: "VTOL Cessna 182 \nFlight Speed: 30 m/s \nEndurance: 2h"
+                    wrapMode: Text.WrapAnywhere
+                    readOnly: true
+                    font.pointSize: contentFontSize
+                    width: parent.width
+                    height: contentHeight // Make the height match the content
+                }
+            }
+
+            Button {
+                id: btnEdit
+                text: qsTr("Edit")
+                Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+                Layout.column: 3
+                Layout.row: 7
+                Layout.columnSpan: 1
+                Layout.rowSpan: 1
+                onClicked:  {
+                    btnEdit.enabled = false
+                    btnSave.enabled = true
+
+                }
+            }
+
+            Button {
+                id: btnSave
+                text: qsTr("Save")
+                Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+                Layout.column: 4
+                Layout.row: 7
+                Layout.columnSpan: 1
+                Layout.rowSpan: 1
+                enabled: false
+                onClicked: {
+                    btnEdit.enabled = true
+                    btnSave.enabled = false
+                }
+            }
         }
     }
 
@@ -117,190 +400,314 @@ Page {
         }
     }
 
-    ListView {
+    Rectangle {
+        id: rectSystemInfo
         anchors {
             top: hdSystemInfo.bottom
-            left: parent.left
-            right: parent.right
             bottom: parent.bottom
+            horizontalCenter: parent.horizontalCenter
         }
-        model: 20 // Number of rows
+        width: parent.width - 100
 
-        delegate: Item {
-            width: parent.width
-            height: 50
+        GridLayout {
+            id: grdSystemInfo
+            columns: 3
+            rows: 7
+            columnSpacing: 20
+            anchors {
+                top: parent.top
+                left: parent.left
+                right: parent.right
+                rightMargin: 30
+                leftMargin: 15
+                topMargin: 15
+            }
 
-            Rectangle {
-                width: parent.width
-                height: 50
-                color: index % 2 === 0 ? "lightgray" : "lightblue" // Alternate row colors
-
-                Text {
-                    anchors.centerIn: parent
-                    text: "Row " + (index + 1) + ", Col 1"
+            Text {
+                id: labModelId
+                font {
+                    bold: true
+                    italic: true
+                    pixelSize: headerFontSize
                 }
+                text: "Model Id"
+                Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+                Layout.column: 0
+                Layout.row: 0
+                Layout.columnSpan: 1
+                Layout.rowSpan: 1
+            }
 
-                Text {
-                    anchors {
-                        left: parent.left
-                        verticalCenter: parent.verticalCenter
-                        leftMargin: 10
-                    }
-                    text: "Row " + (index + 1) + ", Col 2"
+            Text {
+                id: txtModelId
+                text: "#000001"
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+                enabled: true
+                font {
+                    bold: true
+                    italic: true
+                    underline: true
+                    pointSize: contentFontSize
                 }
+                Layout.column: 1
+                Layout.row: 0
+                Layout.columnSpan: 2
+                Layout.rowSpan: 1
+                Layout.preferredHeight: 35
+//                Layout.fillWidth: true
+                Layout.alignment: Qt.AlignLeft | Qt.AlignBaseline
+            }
 
-                Text {
-                    anchors {
-                        left: parent.left
-                        verticalCenter: parent.verticalCenter
-                        leftMargin: 150
-                    }
-                    text: "Row " + (index + 1) + ", Col 3"
+            Text {
+                id: labGPS
+                text: qsTr("GPS")
+                font {
+                    bold: true
+                    italic: true
+                    pixelSize: headerFontSize
                 }
+                Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+                Layout.column: 0
+                Layout.row: 1
+                Layout.columnSpan: 1
+                Layout.rowSpan: 1
+            }
+
+            Text {
+                id: labGyro
+                text: qsTr("Gyro")
+                font {
+                    bold: true
+                    italic: true
+                    pixelSize: headerFontSize
+                }
+                Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+                Layout.column: 0
+                Layout.row: 2
+                Layout.columnSpan: 1
+                Layout.rowSpan: 1
+            }
+
+            Text {
+                id: labAccel
+                text: qsTr("Accelerometer")
+                font {
+                    bold: true
+                    italic: true
+                    pixelSize: headerFontSize
+                }
+                Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+                Layout.column: 0
+                Layout.row: 3
+                Layout.columnSpan: 1
+                Layout.rowSpan: 1
+            }
+
+            Text {
+                id: labMagn
+                text: qsTr("Magnetometer")
+                font {
+                    bold: true
+                    italic: true
+                    pixelSize: headerFontSize
+                }
+                Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+                Layout.column: 0
+                Layout.row: 4
+                Layout.columnSpan: 1
+                Layout.rowSpan: 1
+            }
+
+            Text {
+                id: labBaro
+                text: qsTr("Barometer")
+                font {
+                    bold: true
+                    italic: true
+                    pixelSize: headerFontSize
+                }
+                Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+                Layout.column: 0
+                Layout.row: 5
+                Layout.columnSpan: 1
+                Layout.rowSpan: 1
+            }
+
+            Text {
+                id: labSpeed
+                text: qsTr("Speed")
+                font {
+                    bold: true
+                    italic: true
+                    pixelSize: headerFontSize
+                }
+                Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+                Layout.column: 0
+                Layout.row: 6
+                Layout.columnSpan: 1
+                Layout.rowSpan: 1
             }
         }
     }
 
-//    Column {
-//        id: column
-//        anchors.fill: parent
+    function setModelId(id) {
+        txtModelId = id
+    }
 
-//        ScrollView {
-//            id: scrvSystemInfo
-//            anchors {
-//                top: parent.top
-//                topMargin: 15
-//                horizontalCenter: parent.horizontalCenter
-//            }
+//    function setGPS()
 
+    function setUserName(userName) {
+        txtUserName.text = userName
+    }
 
-//            Rectangle {
-//                width: 450
-//                height: 300
+    function setName(name) {
+        txtName.text = name
+    }
 
-//                GridLayout {
-//                    id: gridLayout
-//                    columns: 3
-//                    rows: sensorNum + 1
-//                    anchors.fill: rectSystemInfo
+    function setClientId(clientId) {
+        txtClientId.text = clientId
+    }
 
-//                    Text {
-//                        font {
-//                            bold: true
-//                            italic: true
-//                            pixelSize: headerFontSize
-//                        }
-//                        text: "Sensor"
-//                        horizontalAlignment: Text.AlignHCenter
-//                        verticalAlignment: Text.AlignVCenter
-//                        Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-//                    }
+    function setOtherInfo(info) {
+        txtOtherInfo.text = info
+    }
 
+    function enableFlightConfig() {
+        txtFlightConfig.color = Constants.gray
+        txtFlightConfig.font.bold = true
+        rectFlightConfig.color = Constants.lightGreen
+    }
 
-//                    Text {
-//                        font {
-//                            bold: true
-//                            italic: true
-//                            pixelSize: headerFontSize
-//                        }
-//                        text: "Name"
-//                        Layout.columnSpan: 1
-//                        Layout.rowSpan: 1
-//                        horizontalAlignment: Text.AlignHCenter
-//                        verticalAlignment: Text.AlignVCenter
-//                        Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-//                    }
+    function disableFlightConfig() {
+        txtFlightConfig.color = Constants.gray
+        txtFlightConfig.font.bold = false
+        rectFlightConfig.color = Constants.lightGray
+    }
 
-//                    Text {
-//                        font {
-//                            bold: true
-//                            italic: true
-//                            pixelSize: headerFontSize
-//                        }
-//                        text: "Status"
-//                        Layout.columnSpan: 1
-//                        Layout.rowSpan: 1
-//                        horizontalAlignment: Text.AlignHCenter
-//                        verticalAlignment: Text.AlignVCenter
-//                        Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-//                    }
+    function enableMapSetting() {
+        txtMapSetting.color = Constants.gray
+        txtMapSetting.font.bold = true
+        rectMapSetting.color = Constants.lightGreen
+    }
 
-//                    Item {
-//                        Layout.column: 0
-//                        Layout.row: 1
-//                        Layout.columnSpan: 3
-//                        Layout.rowSpan: 1
-//                        implicitHeight: 10
-//                    }
-//                }
-//            }
-//        }
-//    }
+    function disableMapSetting() {
+        txtMapSetting.color = Constants.gray
+        txtMapSetting.font.bold = false
+        rectMapSetting.color = Constants.lightGray
+    }
 
+    function enablePlanning() {
+        txtPlanning.color = Constants.gray
+        txtPlanning.font.bold = true
+        rectPlanning.color = Constants.lightGreen
+    }
 
+    function disablePlanning() {
+        txtPlanning.color = Constants.gray
+        txtPlanning.font.bold = false
+        rectPlanning.color = Constants.lightGray
+    }
 
-//    function onClickSensor(sensor) {
-//        console.log("send signal emitted with notice: " + sensor)
-//    }
+    function enableDataAccess() {
+        txtDataAccess.color = Constants.gray
+        txtDataAccess.font.bold = true
+        rectDataAccess.color = Constants.lightGreen
+    }
 
-//    function nameToId(str) {
-//        return Constants.removeSpaces(Constants.lowerFirstCase(str))
-//    }
+    function disableDataAccess() {
+        txtDataAccess.color = Constants.gray
+        txtDataAccess.font.bold = false
+        rectDataAccess.color = Constants.lightGray
+    }
 
-//    function addSensor(sensorType, sensorName, status) {
-//        var importHeader = '  import QtQuick 2.15; import QtQuick.Layouts 2.15; '
-//        var fontSetting = '   font.pixelSize: contentFontSize;
-//                              font.italic: true; '
-//        var alignment = 'Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter;'
-//        var sensorId = nameToId(sensorName)
-//        var clickEvent = '  MouseArea {
-//                                anchors.fill: parent;
-//                                onClicked: sigShowInfo("' + sensorId +'");
-//                            }'
+    function enableModeSetting() {
+        txtModeSetting.color = Constants.gray
+        txtModeSetting.font.bold = true
+        rectModeSetting.color = Constants.lightGreen
+    }
 
-//        var sensorTypeElement = Qt.createQmlObject(importHeader +
-//                                                'Text { text: "' + sensorType + '";'
-//                                                + fontSetting
-//                                                + alignment
-//                                                + '}', gridLayout);
+    function disableModeSetting() {
+        txtModeSetting.color = Constants.gray
+        txtModeSetting.font.bold = false
+        rectModeSetting.color = Constants.lightGray
+    }
 
-//        var sensorNameElement = Qt.createQmlObject(importHeader +
-//                                                'Text { '
-//                                                + 'id: ' + sensorId +';'
-//                                                + 'text: "' + sensorName + '";'
-//                                                + 'font.underline: true;'
-//                                                + fontSetting
-//                                                + clickEvent
-//                                                + alignment
-//                                                + '}', gridLayout);
+    function enableAnalyzing() {
+        txtAnalyzing.color = Constants.gray
+        txtAnalyzing.font.bold = true
+        rectAnalyzing.color = Constants.lightGreen
+    }
 
-//        var statusIcon
-//        if (status === Constants._SENSOR_WELL) {
-//            statusIcon = Qt.createQmlObject(importHeader +
-//                                        'Image {
-//                                            source: "' + '../images/icons/pass.svg";' +
-//                                            'scale: 0.85;' +
-//                                            'fillMode: Image.PreserveAspectFit; ' + alignment +
-//                                        '}', gridLayout);
-//        } else if (status === Constants._SENSOR_ABS) {
-//            statusIcon = Qt.createQmlObject(importHeader +
-//                                        'Image {
-//                                            source: "' + '../images/icons/cross2.svg";' +
-//                                            'scale: 0.8;' +
-//                                            'fillMode: Image.PreserveAspectFit; ' + alignment +
-//                                        '}', gridLayout);
-//        } else {
-//            statusIcon = Qt.createQmlObject(importHeader +
-//                                        'Image {
-//                                            source: "' + '../images/icons/nopass.svg";' +
-//                                            'scale: 0.85;' +
-//                                            'fillMode: Image.PreserveAspectFit;' + alignment +
-//                                        '}', gridLayout);
-//        }
+    function disableAnalyzing() {
+        txtAnalyzing.color = Constants.gray
+        txtAnalyzing.font.bold = false
+        rectAnalyzing.color = Constants.lightGray
+    }
 
-//        // Add the element to the grid
-//        gridLayout.children.push(sensorTypeElement);
-//        gridLayout.children.push(sensorNameElement);
-//        gridLayout.children.push(statusIcon);
-//    }
+    function nameToId(str) {
+        return Constants.removeSpaces(Constants.lowerFirstCase(str))
+    }
+
+    function addSensor(sensorType, sensorName, status) {
+
+        var importHeader = '  import QtQuick 2.15; import QtQuick.Layouts 2.15; import QtQuick.Controls 2.15;'
+        var fontSetting = '   font.pixelSize: 13;
+                              font.italic: true;'
+        var generalAlignment = ' Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter;'
+        var sensorNameAlignment = generalAlignment + 'Layout.preferredHeight: 35
+
+                                                      Layout.column: 1; Layout.row: ' + (sensorType + 1).toString() +';'
+        var statusIconAlignment = generalAlignment + 'Layout.fillWidth: true;
+                                                      horizontalAlignment: Text.AlignHCenter;
+                                                      verticalAlignment: Text.AlignVCenter;
+                                                      Layout.column: 2; Layout.row: ' + (sensorType + 1).toString() +';'
+        console.log("testtttt")
+        console.log(sensorNameAlignment)
+        var sensorId = nameToId(sensorName)
+        var clickEvent = '  MouseArea {
+                                anchors.fill: parent;
+                                onClicked: sigShowInfo("' + sensorId +'");
+                            }'
+
+        var sensorNameElement = Qt.createQmlObject(importHeader +
+                                                'Text { '
+                                                + 'id: ' + sensorId +';'
+                                                + 'text: "' + sensorName + '";'
+//                                                + 'font {
+//                                                    underline: true;
+//                                                   }'
+                                                + fontSetting
+                                                + clickEvent
+                                                + sensorNameAlignment
+                                                + '}', grdSystemInfo);
+
+        var statusIcon
+        if (status === Constants._SENSOR_WELL) {
+            statusIcon = Qt.createQmlObject(importHeader +
+                                        'Image {
+                                            source: "' + '../images/icons/pass.svg";' +
+                                            'scale: 0.85;' +
+                                            'fillMode: Image.PreserveAspectFit; ' + statusIconAlignment +
+                                        '}', grdSystemInfo);
+        } else if (status === Constants._SENSOR_ABS) {
+            statusIcon = Qt.createQmlObject(importHeader +
+                                        'Image {
+                                            source: "' + '../images/icons/cross2.svg";' +
+                                            'scale: 0.8;' +
+                                            'fillMode: Image.PreserveAspectFit; ' + statusIconAlignment +
+                                        '}', grdSystemInfo);
+        } else {
+            statusIcon = Qt.createQmlObject(importHeader +
+                                        'Image {
+                                            source: "' + '../images/icons/nopass.svg";' +
+                                            'scale: 0.85;' +
+                                            'fillMode: Image.PreserveAspectFit;' + statusIconAlignment +
+                                        '}', grdSystemInfo);
+        }
+
+        // Add the element to the grid
+        grdSystemInfo.children.push(sensorNameElement);
+        grdSystemInfo.children.push(statusIcon);
+    }
 }
