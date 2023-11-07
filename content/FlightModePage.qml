@@ -222,6 +222,11 @@ Page {
                             RadioButton {
                                 id: btnDrop
                                 text: "Drop"
+                                onClicked: {
+                                    btnLand.checked = false
+                                    btnHover.checked = false
+                                    btnRTH.checked = false
+                                }
                             }
 
                             Image {
@@ -241,10 +246,14 @@ Page {
                         height: rectBound1.width
 
                         Row {
-
                             RadioButton {
                                 id: btnHover
                                 text: "Hover"
+                                onClicked: {
+                                    btnLand.checked = false
+                                    btnDrop.checked = false
+                                    btnRTH.checked = false
+                                }
                             }
 
                             Image {
@@ -279,7 +288,11 @@ Page {
                             RadioButton {
                                 id: btnLand
                                 text: "Land"
-                                autoExclusive: false
+                                onClicked: {
+                                    btnHover.checked = false
+                                    btnDrop.checked = false
+                                    btnRTH.checked = false
+                                }
                             }
 
                             Image {
@@ -302,6 +315,11 @@ Page {
                             RadioButton {
                                 id: btnRTH
                                 text: "RTL"
+                                onClicked: {
+                                    btnHover.checked = false
+                                    btnDrop.checked = false
+                                    btnLand.checked = false
+                                }
                             }
 
                             Image {

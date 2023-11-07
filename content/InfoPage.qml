@@ -17,6 +17,13 @@ Page {
 
     property int headerFontSize: 15
     property int contentFontSize: 10
+    property bool enableFlightConfig: false
+    property bool enableMapSetting: false
+    property bool enablePlanning: false
+    property bool enableDataAccess: false
+    property bool enableModeSetting: false
+    property bool enableAnalyzing: false
+
 
     Component.onCompleted: {
         addSensor(_SENSOR_TYPE_GPS, "M8N", Constants._SENSOR_WELL)
@@ -28,7 +35,8 @@ Page {
         enableFlightConfig()
         enableModeSetting()
         enableDataAccess()
-        setOtherInfo("zondat cuc ky dep trai")
+        setClientId("vtol_#01")
+//        setOtherInfo("zondat cuc ky dep trai")
     }
 
     SectionHeader {
@@ -84,7 +92,7 @@ Page {
                 id: txtUserName
                 font.pointSize: contentFontSize
                 text: "Admin"
-                readOnly: true
+                readOnly: btnEdit.enabled
                 enabled: true
                 Layout.column: 3
                 Layout.row: 0
@@ -115,7 +123,7 @@ Page {
                 font.pointSize: contentFontSize
                 text: "Admin"
                 enabled: true
-                readOnly: true
+                readOnly: btnEdit.enabled
                 Layout.column: 3
                 Layout.row: 1
                 Layout.columnSpan: 2
@@ -169,6 +177,7 @@ Page {
             }
 
             Button {
+                checked: false
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
                 Layout.column: 3
                 Layout.row: 3
@@ -192,7 +201,18 @@ Page {
                         anchors.centerIn: parent
                     }
                 }
-//                enabled: btnEdit.enabled === false
+
+                enabled: !btnEdit.enabled
+                onClicked: {
+                    enableFlightConfig = !enableFlightConfig
+                    if (enableFlightConfig) {
+                        txtFlightConfig.font.bold = true
+                        rectFlightConfig.color = Constants.lightGreen
+                    } else {
+                        txtFlightConfig.font.bold = false
+                        rectFlightConfig.color = Constants.lightGray
+                    }
+                }
             }
 
             Button {
@@ -216,6 +236,18 @@ Page {
                         font.pixelSize: headerFontSize
                         color: Constants.gray
                         anchors.centerIn: parent
+                    }
+                }
+
+                enabled: !btnEdit.enabled
+                onClicked: {
+                    enableMapSetting = !enableMapSetting
+                    if (enableMapSetting) {
+                        txtMapSetting.font.bold = true
+                        rectMapSetting.color = Constants.lightGreen
+                    } else {
+                        txtMapSetting.font.bold = false
+                        rectMapSetting.color = Constants.lightGray
                     }
                 }
             }
@@ -243,6 +275,18 @@ Page {
                         anchors.centerIn: parent
                     }
                 }
+
+                enabled: !btnEdit.enabled
+                onClicked: {
+                    enablePlanning = !enablePlanning
+                    if (enablePlanning) {
+                        txtPlanning.font.bold = true
+                        rectPlanning.color = Constants.lightGreen
+                    } else {
+                        txtPlanning.font.bold = false
+                        rectPlanning.color = Constants.lightGray
+                    }
+                }
             }
 
             Button {
@@ -254,7 +298,7 @@ Page {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
 
-                Rectangle {
+                background: Rectangle {
                     id: rectDataAccess
                     color: Constants.lightGray
                     anchors.fill: parent
@@ -266,6 +310,18 @@ Page {
                         font.pixelSize: headerFontSize
                         color: Constants.gray
                         anchors.centerIn: parent
+                    }
+                }
+
+                enabled: !btnEdit.enabled
+                onClicked: {
+                    enableDataAccess = !enableDataAccess
+                    if (enableDataAccess) {
+                        txtDataAccess.font.bold = true
+                        rectDataAccess.color = Constants.lightGreen
+                    } else {
+                        txtDataAccess.font.bold = false
+                        rectDataAccess.color = Constants.lightGray
                     }
                 }
             }
@@ -280,7 +336,7 @@ Page {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
 
-                Rectangle {
+                background: Rectangle {
                     id: rectModeSetting
                     color: Constants.lightGray
                     anchors.fill: parent
@@ -294,6 +350,18 @@ Page {
                         anchors.centerIn: parent
                     }
                 }
+
+                enabled: !btnEdit.enabled
+                onClicked: {
+                    enableModeSetting = !enableModeSetting
+                    if (enableModeSetting) {
+                        txtModeSetting.font.bold = true
+                        rectModeSetting.color = Constants.lightGreen
+                    } else {
+                        txtModeSetting.font.bold = false
+                        rectModeSetting.color = Constants.lightGray
+                    }
+                }
             }
 
             Button {
@@ -304,7 +372,7 @@ Page {
                 Layout.rowSpan: 1
                 Layout.fillWidth: true
 
-                Rectangle {
+                background: Rectangle {
                     id: rectAnalyzing
                     color: Constants.lightGray
                     anchors.fill: parent
@@ -316,6 +384,18 @@ Page {
                         font.pixelSize: headerFontSize
                         color: Constants.gray
                         anchors.centerIn: parent
+                    }
+                }
+
+                enabled: !btnEdit.enabled
+                onClicked: {
+                    enableAnalyzing = !enableAnalyzing
+                    if (enableAnalyzing) {
+                        txtAnalyzing.font.bold = true
+                        rectAnalyzing.color = Constants.lightGreen
+                    } else {
+                        txtAnalyzing.font.bold = false
+                        rectAnalyzing.color = Constants.lightGray
                     }
                 }
             }
@@ -351,7 +431,13 @@ Page {
                     wrapMode: Text.WrapAnywhere
                     readOnly: true
                     font.pointSize: contentFontSize
-                    width: parent.width
+                    anchors {
+                        top: parent.top
+                        left: parent.left
+                        topMargin: -10
+                        leftMargin: -10
+                    }
+                    width: parent.width - 10
                     height: contentHeight // Make the height match the content
                 }
             }
@@ -573,77 +659,77 @@ Page {
         txtOtherInfo.text = info
     }
 
-    function enableFlightConfig() {
-        txtFlightConfig.color = Constants.gray
-        txtFlightConfig.font.bold = true
-        rectFlightConfig.color = Constants.lightGreen
-    }
+//    function enableFlightConfig() {
+//        txtFlightConfig.color = Constants.gray
+//        txtFlightConfig.font.bold = true
+//        rectFlightConfig.color = Constants.lightGreen
+//    }
 
-    function disableFlightConfig() {
-        txtFlightConfig.color = Constants.gray
-        txtFlightConfig.font.bold = false
-        rectFlightConfig.color = Constants.lightGray
-    }
+//    function disableFlightConfig() {
+//        txtFlightConfig.color = Constants.gray
+//        txtFlightConfig.font.bold = false
+//        rectFlightConfig.color = Constants.lightGray
+//    }
 
-    function enableMapSetting() {
-        txtMapSetting.color = Constants.gray
-        txtMapSetting.font.bold = true
-        rectMapSetting.color = Constants.lightGreen
-    }
+//    function enableMapSetting() {
+//        txtMapSetting.color = Constants.gray
+//        txtMapSetting.font.bold = true
+//        rectMapSetting.color = Constants.lightGreen
+//    }
 
-    function disableMapSetting() {
-        txtMapSetting.color = Constants.gray
-        txtMapSetting.font.bold = false
-        rectMapSetting.color = Constants.lightGray
-    }
+//    function disableMapSetting() {
+//        txtMapSetting.color = Constants.gray
+//        txtMapSetting.font.bold = false
+//        rectMapSetting.color = Constants.lightGray
+//    }
 
-    function enablePlanning() {
-        txtPlanning.color = Constants.gray
-        txtPlanning.font.bold = true
-        rectPlanning.color = Constants.lightGreen
-    }
+//    function enablePlanning() {
+//        txtPlanning.color = Constants.gray
+//        txtPlanning.font.bold = true
+//        rectPlanning.color = Constants.lightGreen
+//    }
 
-    function disablePlanning() {
-        txtPlanning.color = Constants.gray
-        txtPlanning.font.bold = false
-        rectPlanning.color = Constants.lightGray
-    }
+//    function disablePlanning() {
+//        txtPlanning.color = Constants.gray
+//        txtPlanning.font.bold = false
+//        rectPlanning.color = Constants.lightGray
+//    }
 
-    function enableDataAccess() {
-        txtDataAccess.color = Constants.gray
-        txtDataAccess.font.bold = true
-        rectDataAccess.color = Constants.lightGreen
-    }
+//    function enableDataAccess() {
+//        txtDataAccess.color = Constants.gray
+//        txtDataAccess.font.bold = true
+//        rectDataAccess.color = Constants.lightGreen
+//    }
 
-    function disableDataAccess() {
-        txtDataAccess.color = Constants.gray
-        txtDataAccess.font.bold = false
-        rectDataAccess.color = Constants.lightGray
-    }
+//    function disableDataAccess() {
+//        txtDataAccess.color = Constants.gray
+//        txtDataAccess.font.bold = false
+//        rectDataAccess.color = Constants.lightGray
+//    }
 
-    function enableModeSetting() {
-        txtModeSetting.color = Constants.gray
-        txtModeSetting.font.bold = true
-        rectModeSetting.color = Constants.lightGreen
-    }
+//    function enableModeSetting() {
+//        txtModeSetting.color = Constants.gray
+//        txtModeSetting.font.bold = true
+//        rectModeSetting.color = Constants.lightGreen
+//    }
 
-    function disableModeSetting() {
-        txtModeSetting.color = Constants.gray
-        txtModeSetting.font.bold = false
-        rectModeSetting.color = Constants.lightGray
-    }
+//    function disableModeSetting() {
+//        txtModeSetting.color = Constants.gray
+//        txtModeSetting.font.bold = false
+//        rectModeSetting.color = Constants.lightGray
+//    }
 
-    function enableAnalyzing() {
-        txtAnalyzing.color = Constants.gray
-        txtAnalyzing.font.bold = true
-        rectAnalyzing.color = Constants.lightGreen
-    }
+//    function enableAnalyzing() {
+//        txtAnalyzing.color = Constants.gray
+//        txtAnalyzing.font.bold = true
+//        rectAnalyzing.color = Constants.lightGreen
+//    }
 
-    function disableAnalyzing() {
-        txtAnalyzing.color = Constants.gray
-        txtAnalyzing.font.bold = false
-        rectAnalyzing.color = Constants.lightGray
-    }
+//    function disableAnalyzing() {
+//        txtAnalyzing.color = Constants.gray
+//        txtAnalyzing.font.bold = false
+//        rectAnalyzing.color = Constants.lightGray
+//    }
 
     function nameToId(str) {
         return Constants.removeSpaces(Constants.lowerFirstCase(str))
@@ -662,8 +748,8 @@ Page {
                                                       horizontalAlignment: Text.AlignHCenter;
                                                       verticalAlignment: Text.AlignVCenter;
                                                       Layout.column: 2; Layout.row: ' + (sensorType + 1).toString() +';'
-        console.log("testtttt")
-        console.log(sensorNameAlignment)
+//        console.log("testtttt")
+//        console.log(sensorNameAlignment)
         var sensorId = nameToId(sensorName)
         var clickEvent = '  MouseArea {
                                 anchors.fill: parent;

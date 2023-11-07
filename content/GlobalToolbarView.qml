@@ -15,10 +15,24 @@ Row {
     id: globalToolbar
     height: Constants.globalToolBarHeight
     width: Constants.width
+
     property int iconHeight: 100
     property int iconWidth: 100
     property int barHeight: 100
+
+    readonly property int _DEVICE_TYPE_BAT: 0
+    readonly property int _DEVICE_TYPE_GYRO: 1
+    readonly property int _DEVICE_TYPE_GPS: 2
+    readonly property int _DEVICE_TYPE_ACCEL: 3
+    readonly property int _DEVICE_TYPE_MAGN: 4
+    readonly property int _DEVICE_TYPE_BARO: 5
+    readonly property int _DEVICE_TYPE_SPD: 6
+
     layoutDirection: Qt.LeftToRight
+
+    Component.onCompleted: {
+        setDeviceState(_DEVICE_TYPE_BAT, Constants._BAT_NORM)
+    }
 
     Row {
         id: mainToolbar
@@ -31,9 +45,6 @@ Row {
         ToolButton {
             id: buttonDisconnect
             text: qsTr("Disconnect")
-            //            anchors.top: parent.top
-            //            anchors.bottom: parent.bottom
-            //            anchors.left: parent.left
             autoExclusive: true
             checked: true
             checkable: true
@@ -46,9 +57,6 @@ Row {
         ToolButton {
             id: buttonConnect
             text: qsTr("Connect")
-            //            anchors.top: parent.top
-            //            anchors.bottom: parent.bottom
-            //            anchors.left: buttonDisconnect.right
             autoExclusive: true
             checkable: true
             display: AbstractButton.TextUnderIcon
@@ -60,9 +68,6 @@ Row {
         ToolButton {
             id: buttonAppSetting
             text: qsTr("App Setting")
-            //            anchors.top: parent.top
-            //            anchors.bottom: parent.bottom
-            //            anchors.left: buttonConnect.right
             autoExclusive: false
             checkable: true
             display: AbstractButton.TextUnderIcon
@@ -86,24 +91,8 @@ Row {
             highlighted: false
             display: AbstractButton.TextUnderIcon
             icon.source: "../images/icons/cf_icon_bat_full.svg"
-            //            flat: true
             width: iconWidth
             height: iconHeight
-
-            onClicked: setBatteryState(1)
-
-            function setBatteryState(batteryHealth) {
-                if (batteryHealth === Constants._BAT_WELL) {
-                    icon.source= "../images/icons/cf_icon_bat_full.svg"
-                    icon.color = Constants.green
-                } else if (batteryHealth === Constants._BAT_NORM) {
-                    icon.source= "../images/icons/cf_icon_bat_half.svg"
-                    icon.color = Constants.orange
-                } else {
-                    icon.source= "../images/icons/cf_icon_bat_low.svg"
-                    icon.color = Constants.lightRed
-                }
-            }
         }
 
         ToolButton {
@@ -113,74 +102,29 @@ Row {
             display: AbstractButton.TextUnderIcon
             width: iconWidth
             height: iconHeight
-
-//            onClicked: setGyroState(1)
-
-            function setGyroState(state) {
-                if (state === Constants._SENSOR_WELL) {
-                    icon.color = Constants.blue
-                } else if (state === Constants._SENSOR_ABS) {
-                    icon.color = Constants.gray
-                } else {
-                    icon.color = Constants.lightRed
-                }
-            }
         }
 
         ToolButton {
             id: buttonGPS
             text: qsTr("GPS")
-            //            anchors.top: parent.top
-            //            anchors.left: buttonGyro.right
-            //            anchors.bottom: parent.bottom
             icon.source: "../images/icons/sensor_sat_on.png"
             display: AbstractButton.TextUnderIcon
             width: iconWidth
             height: iconHeight
-
-            onClicked: setGpsState(1)
-
-            function setGpsState(state) {
-                if (state === Constants._SENSOR_WELL) {
-                    icon.color = Constants.blue
-                } else if (state === Constants._SENSOR_ABS) {
-                    icon.color = Constants.gray
-                } else {
-                    icon.color = Constants.lightRed
-                }
-            }
         }
 
         ToolButton {
             id: buttonAccelerator
             text: qsTr("Accelerator")
-            //            anchors.top: parent.top
-            //            anchors.left: buttonGPS.right
-            //            anchors.bottom: parent.bottom
             icon.source: "../images/icons/sensor_acc_on.png"
             display: AbstractButton.TextUnderIcon
             width: iconWidth
             height: iconHeight
-
-            onClicked: setAccelState(-1)
-
-            function setAccelState(state) {
-                if (state === Constants._SENSOR_WELL) {
-                    icon.color = Constants.blue
-                } else if (state === Constants._SENSOR_ABS) {
-                    icon.color = Constants.gray
-                } else {
-                    icon.color = Constants.lightRed
-                }
-            }
         }
 
         ToolButton {
             id: buttonMagnetometer
             text: qsTr("Magneto")
-            //            anchors.top: parent.top
-            //            anchors.left: buttonAccelerator.right
-            //            anchors.bottom: parent.bottom
             icon.source: "../images/icons/sensor_mag_on.png"
             display: AbstractButton.TextUnderIcon
             width: iconWidth
@@ -202,9 +146,6 @@ Row {
         ToolButton {
             id: buttonBarometer
             text: qsTr("Barometer")
-            //            anchors.top: parent.top
-            //            anchors.left: buttonMagnetometer.right
-            //            anchors.bottom: parent.bottom
             icon.source: "../images/icons/sensor_baro_on.png"
             display: AbstractButton.TextUnderIcon
             width: iconWidth
@@ -226,25 +167,10 @@ Row {
         ToolButton {
             id: buttonSpeed
             text: qsTr("Speed")
-            //            anchors.top: parent.top
-            //            anchors.left: buttonBarometer.right
-            //            anchors.bottom: parent.bottom
             icon.source: "../images/icons/sensor_airspeed_on.png"
             display: AbstractButton.TextUnderIcon
             width: iconWidth
             height: iconHeight
-
-            onClicked: setSpeedState(-1)
-
-            function setSpeedState(state) {
-                if (state === Constants._SENSOR_WELL) {
-                    icon.color = Constants.blue
-                } else if (state === Constants._SENSOR_ABS) {
-                    icon.color = Constants.gray
-                } else {
-                    icon.color = Constants.lightRed
-                }
-            }
         }
     }
 
@@ -282,19 +208,83 @@ Row {
             fillMode: Image.PreserveAspectFit
         }
 
-//        Rectangle {
-//            id: hti
-//            color: Constants.lightGray
-//            width: 175
-//            height: 100
-//            radius: 10
+    }
 
-//            Image {
-//                id: sciskyLogo
-//                height: 100
-//                source: "../images/scisky-logo.svg"
-//                fillMode: Image.PreserveAspectFit
+    function setDeviceState(deviceType, deviceHealth) {
+        if (deviceType === _DEVICE_TYPE_BAT) {
+            if (deviceHealth === Constants._BAT_WELL) {
+                buttonBattery.icon.source= "../images/icons/cf_icon_bat_full.svg"
+                buttonBattery.icon.color = Constants.green
+            } else if (deviceHealth === Constants._BAT_NORM) {
+                buttonBattery.icon.source= "../images/icons/cf_icon_bat_half.svg"
+                buttonBattery.icon.color = Constants.orange
+            } else {
+                buttonBattery.icon.source= "../images/icons/cf_icon_bat_low.svg"
+                buttonBattery.icon.color = Constants.lightRed
+            }
+        }
+//        else if (deviceType === _DEVICE_TYPE_ACCEL) {
+//            if (deviceHealth === Constants._SENSOR_WELL) {
+//                icon.color = Constants.blue
+//            } else if (deviceHealth === Constants._SENSOR_ABS) {
+//                icon.color = Constants.gray
+//            } else {
+//                icon.color = Constants.lightRed
 //            }
 //        }
+//        else if (deviceType === _DEVICE_TYPE_BARO) {
+//            if (deviceHealth === Constants._SENSOR_WELL) {
+//                icon.color = Constants.blue
+//            } else if (deviceHealth === Constants._SENSOR_ABS) {
+//                icon.color = Constants.gray
+//            } else {
+//                icon.color = Constants.lightRed
+//            }
+//        }
+//        else if (deviceType === _DEVICE_TYPE_GPS) {
+//            if (deviceHealth === Constants._SENSOR_WELL) {
+//                icon.color = Constants.blue
+//            } else if (deviceHealth === Constants._SENSOR_ABS) {
+//                icon.color = Constants.gray
+//            } else {
+//                icon.color = Constants.lightRed
+//            }
+//        }
+//        else if (deviceType === _DEVICE_TYPE_GYRO) {
+//            if (deviceHealth === Constants._SENSOR_WELL) {
+//                icon.color = Constants.blue
+//            } else if (deviceHealth === Constants._SENSOR_ABS) {
+//                icon.color = Constants.gray
+//            } else {
+//                icon.color = Constants.lightRed
+//            }
+//        }
+//        else if (deviceType === _DEVICE_TYPE_MAGN) {
+//            if (deviceHealth === Constants._SENSOR_WELL) {
+//                icon.color = Constants.blue
+//            } else if (deviceHealth === Constants._SENSOR_ABS) {
+//                icon.color = Constants.gray
+//            } else {
+//                icon.color = Constants.lightRed
+//            }
+//        }
+//        else if (deviceType === _DEVICE_TYPE_SPD) {
+//            if (deviceHealth === Constants._SENSOR_WELL) {
+//                icon.color = Constants.blue
+//            } else if (deviceHealth === Constants._SENSOR_ABS) {
+//                icon.color = Constants.gray
+//            } else {
+//                icon.color = Constants.lightRed
+//            }
+//        }
+        else {
+            if (deviceHealth === Constants._SENSOR_WELL) {
+                icon.color = Constants.blue
+            } else if (deviceHealth === Constants._SENSOR_ABS) {
+                icon.color = Constants.gray
+            } else {
+                icon.color = Constants.lightRed
+            }
+        }
     }
 }
