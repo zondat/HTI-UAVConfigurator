@@ -36,7 +36,6 @@ Page {
         enableModeSetting()
         enableDataAccess()
         setClientId("vtol_#01")
-//        setOtherInfo("zondat cuc ky dep trai")
     }
 
     SectionHeader {
@@ -201,7 +200,6 @@ Page {
                         anchors.centerIn: parent
                     }
                 }
-
                 enabled: !btnEdit.enabled
                 onClicked: {
                     enableFlightConfig = !enableFlightConfig
@@ -659,78 +657,6 @@ Page {
         txtOtherInfo.text = info
     }
 
-//    function enableFlightConfig() {
-//        txtFlightConfig.color = Constants.gray
-//        txtFlightConfig.font.bold = true
-//        rectFlightConfig.color = Constants.lightGreen
-//    }
-
-//    function disableFlightConfig() {
-//        txtFlightConfig.color = Constants.gray
-//        txtFlightConfig.font.bold = false
-//        rectFlightConfig.color = Constants.lightGray
-//    }
-
-//    function enableMapSetting() {
-//        txtMapSetting.color = Constants.gray
-//        txtMapSetting.font.bold = true
-//        rectMapSetting.color = Constants.lightGreen
-//    }
-
-//    function disableMapSetting() {
-//        txtMapSetting.color = Constants.gray
-//        txtMapSetting.font.bold = false
-//        rectMapSetting.color = Constants.lightGray
-//    }
-
-//    function enablePlanning() {
-//        txtPlanning.color = Constants.gray
-//        txtPlanning.font.bold = true
-//        rectPlanning.color = Constants.lightGreen
-//    }
-
-//    function disablePlanning() {
-//        txtPlanning.color = Constants.gray
-//        txtPlanning.font.bold = false
-//        rectPlanning.color = Constants.lightGray
-//    }
-
-//    function enableDataAccess() {
-//        txtDataAccess.color = Constants.gray
-//        txtDataAccess.font.bold = true
-//        rectDataAccess.color = Constants.lightGreen
-//    }
-
-//    function disableDataAccess() {
-//        txtDataAccess.color = Constants.gray
-//        txtDataAccess.font.bold = false
-//        rectDataAccess.color = Constants.lightGray
-//    }
-
-//    function enableModeSetting() {
-//        txtModeSetting.color = Constants.gray
-//        txtModeSetting.font.bold = true
-//        rectModeSetting.color = Constants.lightGreen
-//    }
-
-//    function disableModeSetting() {
-//        txtModeSetting.color = Constants.gray
-//        txtModeSetting.font.bold = false
-//        rectModeSetting.color = Constants.lightGray
-//    }
-
-//    function enableAnalyzing() {
-//        txtAnalyzing.color = Constants.gray
-//        txtAnalyzing.font.bold = true
-//        rectAnalyzing.color = Constants.lightGreen
-//    }
-
-//    function disableAnalyzing() {
-//        txtAnalyzing.color = Constants.gray
-//        txtAnalyzing.font.bold = false
-//        rectAnalyzing.color = Constants.lightGray
-//    }
-
     function nameToId(str) {
         return Constants.removeSpaces(Constants.lowerFirstCase(str))
     }
@@ -738,18 +664,14 @@ Page {
     function addSensor(sensorType, sensorName, status) {
 
         var importHeader = '  import QtQuick 2.15; import QtQuick.Layouts 2.15; import QtQuick.Controls 2.15;'
-        var fontSetting = '   font.pixelSize: 13;
+        var fontSetting = '   font.pixelSize: 15;
                               font.italic: true;'
-        var generalAlignment = ' Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter;'
-        var sensorNameAlignment = generalAlignment + 'Layout.preferredHeight: 35
-
+        var generalAlignment = ' Layout.alignment: Qt.AlignHCenter | Qt.AlignBaseline;'
+        var sensorNameAlignment = generalAlignment + 'Layout.preferredHeight: 35;
                                                       Layout.column: 1; Layout.row: ' + (sensorType + 1).toString() +';'
         var statusIconAlignment = generalAlignment + 'Layout.fillWidth: true;
-                                                      horizontalAlignment: Text.AlignHCenter;
-                                                      verticalAlignment: Text.AlignVCenter;
                                                       Layout.column: 2; Layout.row: ' + (sensorType + 1).toString() +';'
-//        console.log("testtttt")
-//        console.log(sensorNameAlignment)
+
         var sensorId = nameToId(sensorName)
         var clickEvent = '  MouseArea {
                                 anchors.fill: parent;

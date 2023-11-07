@@ -129,18 +129,6 @@ Row {
             display: AbstractButton.TextUnderIcon
             width: iconWidth
             height: iconHeight
-
-            onClicked: setMagnetoState(1)
-
-            function setMagnetoState(state) {
-                if (state === Constants._SENSOR_WELL) {
-                    icon.color = Constants.blue
-                } else if (state === Constants._SENSOR_ABS) {
-                    icon.color = Constants.gray
-                } else {
-                    icon.color = Constants.lightRed
-                }
-            }
         }
 
         ToolButton {
@@ -150,18 +138,6 @@ Row {
             display: AbstractButton.TextUnderIcon
             width: iconWidth
             height: iconHeight
-
-            onClicked: setBaroState(-1)
-
-            function setBaroState(state) {
-                if (state === Constants._SENSOR_WELL) {
-                    icon.color = Constants.blue
-                } else if (state === Constants._SENSOR_ABS) {
-                    icon.color = Constants.gray
-                } else {
-                    icon.color = Constants.lightRed
-                }
-            }
         }
 
         ToolButton {
