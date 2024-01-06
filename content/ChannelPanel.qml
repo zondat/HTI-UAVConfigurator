@@ -60,6 +60,7 @@ Item {
                 id: txtMinValue
                 width: 70
                 height: 25
+                anchors.verticalCenter: parent.verticalCenter
                 font.pixelSize: 10
 
                 anchors {
